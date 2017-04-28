@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<script type="text/javascript">
+			document.addEventListener('plusready', function() {
+				//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+
+			});
+			
+			function funFromJS()
+			{
+				alert('生活不止眼前的苟且，还有诗与远方...')
+			}
+			
+			function fromAndroid()
+			{
+//				alert('生活不止眼前的苟且，还有诗与远方...')
+				javaObj.funFromAndroid();
+			}
+			
+//			function openDialog()
+//			{
+//				javaObj.openDialog();
+//			}
+		</script>
+	</head>
+
+	<body>
+		<button type="button" onclick="fromAndroid()">提示</button>
+		<button type="button" onclick="javaObj.openDialog()">弹出dailog</button>
+	</body>
+
+</html>

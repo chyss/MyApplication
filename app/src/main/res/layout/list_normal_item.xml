@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:minHeight="120dp"
+    android:background="@drawable/list_item_bg_selector"
+    >
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/list_normal_item_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        fresco:actualImageScaleType="centerCrop"
+        fresco:roundAsCircle="true"
+        />
+
+    <!--<com.chyss.myapplication.view.RoundRectImageView-->
+        <!--android:id="@+id/list_normal_item_img"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--/>-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/list_normal_item_img"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--/>-->
+
+</RelativeLayout>

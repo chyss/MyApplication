@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FF4500" >
+
+        <ImageView
+            android:id="@+id/main_scan_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:src="@mipmap/sy_fc_sys_icon" />
+
+        <ImageView
+            android:id="@+id/main_account_ico_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/sy_fc_wd_icon" />
+
+        <Button
+            android:id="@+id/main_search_button"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/main_account_ico_img"
+            android:layout_toRightOf="@+id/main_scan_img"
+            android:background="@drawable/search_button_bg"
+            android:drawableLeft="@mipmap/sy_sousuo_icon_black"
+            android:gravity="left|center_vertical"
+            android:text=" 生活不止眼前的苟且，还有诗与远方..."
+            android:textColor="#999999"
+            android:textSize="11dp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/newsfragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" >
+                
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/listfragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+                
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
