@@ -75,6 +75,11 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name=".widget.flingswipe.SwipeActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
         <receiver android:name=".widget.notice.NotificationReceiver">
             <intent-filter >
                 <action android:name="com.chyss.myapplication.notice"/>

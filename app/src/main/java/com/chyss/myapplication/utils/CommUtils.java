@@ -5,11 +5,14 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.text.TextUtils;
 
 /**
  * 提供各类通用工具
@@ -72,5 +75,15 @@ public class CommUtils
         SimpleDateFormat format = new SimpleDateFormat("HH:mm",
                 Locale.SIMPLIFIED_CHINESE);
         return format.format(new Date());
+    }
+
+    public static boolean isMobileNum(String mobiles) {
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(17[0-9])|(14[0-9])|(18[0-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        if (TextUtils.isEmpty(mobiles)) {
+            return false;
+        } else {
+            return m.matches();
+        }
     }
 }

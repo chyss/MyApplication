@@ -22,6 +22,8 @@ android {
 
 dependencies {
 
+    compile 'com.jakewharton:butterknife:5.1.2'
+
 //    compile 'com.lcodecorex:tkrefreshlayout:1.0.3'
 
     compile 'com.android.support:recyclerview-v7:24.2.1'

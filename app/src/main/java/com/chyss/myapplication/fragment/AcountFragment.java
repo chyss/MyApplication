@@ -15,6 +15,7 @@ import com.chyss.myapplication.activity.RecyclerActivity02;
 import com.chyss.myapplication.view.AnimImageView;
 import com.chyss.myapplication.widget.dialog.BottomPopDialog;
 import com.chyss.myapplication.widget.dialog.CenterPopDialog;
+import com.chyss.myapplication.widget.flingswipe.SwipeActivity;
 import com.chyss.myapplication.widget.notice.NotificationHelper;
 import com.chyss.myapplication.widget.recycler.Activity1;
 import com.chyss.myapplication.widget.recycler.Activity2;
@@ -32,6 +33,7 @@ public class AcountFragment extends Fragment {
 	private AnimImageView anim_imgview;
 	private RelativeLayout input_pop;
 	private RelativeLayout to_recyclerview,to_recyclerview02,to_activity1,to_activity2;
+	private RelativeLayout swip_view;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,9 @@ public class AcountFragment extends Fragment {
 
 		to_activity2 = (RelativeLayout)root.findViewById(R.id.recycler_refresh2);
 		to_activity2.setOnClickListener(onClickListener);
+
+		swip_view = (RelativeLayout)root.findViewById(R.id.swip_view);
+		swip_view.setOnClickListener(onClickListener);
 	}
 
 	OnClickListener onClickListener = new OnClickListener()
@@ -127,6 +132,9 @@ public class AcountFragment extends Fragment {
 					break;
 				case R.id.recycler_refresh2:
 					stepNext(Activity2.class);
+					break;
+				case R.id.swip_view:
+					stepNext(SwipeActivity.class);
 					break;
 				default:
 				break;
@@ -176,7 +184,7 @@ public class AcountFragment extends Fragment {
 	protected void showBottomDialog() {
 
 		BottomPopDialog dialog = new BottomPopDialog(getActivity(),
-				R.style.dialog);
+				R.style.SheetDialogStyle);
 		dialog.show();
 	}
 
