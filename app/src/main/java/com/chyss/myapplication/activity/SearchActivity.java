@@ -23,7 +23,7 @@ public class SearchActivity extends BaseActivity
 	private ImageButton search_imgbtn;
 	private LinearLayout container1, container2, container3;
 	
-	private List<HotWord> hotWordList = new ArrayList<HotWord>();
+	private List<HotWord> hotWordList = new ArrayList<>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)

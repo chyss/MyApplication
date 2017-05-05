@@ -1,7 +1,6 @@
 package com.chyss.myapplication.widget.recycler.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +20,6 @@ import com.chyss.myapplication.utils.image.FrescoUtils;
 import com.chyss.myapplication.view.CircleMovementMethod;
 import com.chyss.myapplication.view.SpannableClickable;
 import com.chyss.myapplication.widget.recycler.bean.InfoBean;
-import com.facebook.drawee.drawable.RoundedCornersDrawable;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;

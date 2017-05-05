@@ -156,13 +156,7 @@ public class PullRecyclerViewGroupX extends LinearLayout implements ViewTreeObse
                     recoverLayout();
                 }
 
-                if (isRecyclerReuslt)
-                {
-                    return super.dispatchTouchEvent(ev);
-                } else
-                {
-                    return true;
-                }
+                return !isRecyclerReuslt || super.dispatchTouchEvent(ev);
             default:
                 return true;
         }
@@ -203,11 +197,7 @@ public class PullRecyclerViewGroupX extends LinearLayout implements ViewTreeObse
      */
     private boolean isCanPullDown()
     {
-        if(((RecyclerView) childView).computeHorizontalScrollOffset() <= 0)
-        {
-            return true;
-        }
-        return false;
+        return ((RecyclerView) childView).computeHorizontalScrollOffset() <= 0;
     }
 
 
@@ -218,11 +208,7 @@ public class PullRecyclerViewGroupX extends LinearLayout implements ViewTreeObse
      */
     private boolean isCanPullUp()
     {
-        if(((RecyclerView) childView).computeHorizontalScrollOffset() + ((RecyclerView) childView).computeHorizontalScrollExtent() >= ((RecyclerView) childView).computeHorizontalScrollRange())
-        {
-            return true;
-        }
-        return false;
+        return ((RecyclerView) childView).computeHorizontalScrollOffset() + ((RecyclerView) childView).computeHorizontalScrollExtent() >= ((RecyclerView) childView).computeHorizontalScrollRange();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

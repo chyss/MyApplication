@@ -36,7 +36,7 @@ public class RetrofitActivity extends BaseActivity
     {
         super.onResume();
 
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String> map = new HashMap<>();
         map.put("version",Net.VERSIONCODE);
         map.put("platform",Net.PLATFORM);
         NetUtils.postRequest(callback,map, Net.version);
@@ -47,8 +47,8 @@ public class RetrofitActivity extends BaseActivity
         @Override
         public void onResponse(Call<String> call, Response<String> response)
         {
-            Logg.e(Net.TAG,"response----- : "+response.body().toString());
-            ResultDesc<Version> resultDesc = DataImpl.getData(response.body().toString(),Version.class);
+            Logg.e(Net.TAG,"response----- : "+ response.body());
+            ResultDesc<Version> resultDesc = DataImpl.getData(response.body(),Version.class);
 
             if(resultDesc.getStatus() == 0 && resultDesc.getData() != null)
             {

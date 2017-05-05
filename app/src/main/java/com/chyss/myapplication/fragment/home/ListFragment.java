@@ -23,7 +23,7 @@ public class ListFragment extends Fragment
 {
 	public static final String TAG = "ListFragment";
 	private ExpandListView listView;
-	private List<ListData> listData = new ArrayList<ListData>();
+	private List<ListData> listData = new ArrayList<>();
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

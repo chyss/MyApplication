@@ -6,8 +6,6 @@ import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.data.ResultDesc;
 import com.chyss.myapplication.utils.Logg;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

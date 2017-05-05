@@ -1,11 +1,9 @@
 package com.chyss.myapplication.widget.js;
 
 import android.content.Context;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.widget.Toast;
 
-import com.chyss.myapplication.R;
 import com.chyss.myapplication.widget.dialog.CenterPopDialog;
 
 /**

@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
-import android.widget.Scroller;
 
 /**
  * Created by Administrator on 2017/4/21.

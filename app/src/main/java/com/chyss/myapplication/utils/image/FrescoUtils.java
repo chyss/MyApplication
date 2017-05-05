@@ -9,7 +9,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 /**
- * Created by Administrator on 2017/4/17.
+ * @author chyss 2017-05-05
  */
 
 public class FrescoUtils

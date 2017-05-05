@@ -1,13 +1,9 @@
 package com.chyss.myapplication.interf;
 
-import com.chyss.myapplication.data.ResultDesc;
-
-import java.lang.reflect.ParameterizedType;
 import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.Observer;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;

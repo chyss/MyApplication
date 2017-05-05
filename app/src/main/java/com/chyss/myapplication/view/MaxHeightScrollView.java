@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.widget.ScrollView;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.data.Net;
-import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.utils.UnitUtils;
 
 /**

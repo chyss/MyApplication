@@ -1,7 +1,5 @@
 package com.chyss.myapplication;
 
-import java.io.IOException;
-
 import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.fragment.AcountFragment;
 import com.chyss.myapplication.fragment.FriendzoneFragment;
@@ -67,8 +65,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		
 		homeFragment = new HomeFragment();
 		//mContent = homeFragment;
-		switchContent(mContent,homeFragment,"home");
-		//setFragment(homeFragment,"qq");
+//		switchContent(mContent,homeFragment,"home");
+		setFragment(homeFragment,"home");
 		setallDark();
 		homeImage.setImageResource(R.mipmap.ico_home2);
 		homeText.setTextColor(Color.RED);
@@ -86,8 +84,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 				homeFragment = new HomeFragment();
 			}
-			//setFragment(homeFragment,"qq");
-			switchContent(mContent,homeFragment,"home");
+			setFragment(homeFragment,"home");
+//			switchContent(mContent,homeFragment,"home");
 			setallDark();
 			homeImage.setImageResource(R.mipmap.ico_home2);
 			homeText.setTextColor(Color.RED);
@@ -100,8 +98,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 				kindFragment = new KindFragment();
 			}
-			//setFragment(kindFragment,"wechat");
-			switchContent(mContent,kindFragment,"kind");
+			setFragment(kindFragment,"kind");
+//			switchContent(mContent,kindFragment,"kind");
 			setallDark();
 			kindImage.setImageResource(R.mipmap.ico_financial2);
 			kindText.setTextColor(Color.RED);
@@ -114,8 +112,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 				zoneFragment = new FriendzoneFragment();
 			}
-			//setFragment(zoneFragment,"weibo");
-			switchContent(mContent,zoneFragment,"zone");
+			setFragment(zoneFragment,"zone");
+//			switchContent(mContent,zoneFragment,"zone");
 			setallDark();
 			zoneImage.setImageResource(R.mipmap.ico_more2);
 			zoneText.setTextColor(Color.RED);
@@ -128,8 +126,8 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 
 				acountFragment = new AcountFragment();
 			}
-			//setFragment(acountFragment,"friend");
-			switchContent(mContent,acountFragment,"acount");
+			setFragment(acountFragment,"acount");
+//			switchContent(mContent,acountFragment,"acount");
 			setallDark();
 			acountImage.setImageResource(R.mipmap.ico_account2);
 			acountText.setTextColor(Color.RED);

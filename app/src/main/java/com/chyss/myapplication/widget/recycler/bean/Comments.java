@@ -1,7 +1,7 @@
 package com.chyss.myapplication.widget.recycler.bean;
 
 /**
- * Created by Administrator on 2017/4/27.
+ * @author chyss 2017-05-05
  */
 
 public class Comments

@@ -1,8 +1,6 @@
 package com.chyss.myapplication.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Window;
 import android.widget.TextView;
 
 import com.chyss.myapplication.BaseActivity;
@@ -57,7 +55,7 @@ public class RxActivity extends BaseActivity
      */
     private void getVersionsInfo()
     {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("version", Net.VERSIONCODE);
         map.put("platform", Net.PLATFORM);
 
@@ -116,7 +114,7 @@ public class RxActivity extends BaseActivity
      */
     private void getVersionsInfoOld()
     {
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("version", Net.VERSIONCODE);
         map.put("platform", Net.PLATFORM);
 

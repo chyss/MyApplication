@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -17,7 +16,6 @@ import com.chyss.myapplication.widget.flingswipe.swipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

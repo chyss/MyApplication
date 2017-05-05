@@ -74,7 +74,7 @@ public class WifiListActivity extends BaseActivity
 			for (int j = 1; j < list.size(); j++) {
 				if (list.get(i).level < list.get(j).level) // level属性即为强度
 				{
-					ScanResult temp = null;
+					ScanResult temp;
 					temp = list.get(i);
 					list.set(i, list.get(j));
 					list.set(j, temp);

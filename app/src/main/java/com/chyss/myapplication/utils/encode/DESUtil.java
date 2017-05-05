@@ -61,7 +61,7 @@ public class DESUtil
 	public static byte[] des3EncodeECB(byte[] key, byte[] data)
 			throws Exception
 	{
-		Key deskey = null;
+		Key deskey;
 		DESedeKeySpec spec = new DESedeKeySpec(key);
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		deskey = keyfactory.generateSecret(spec);
@@ -84,7 +84,7 @@ public class DESUtil
 	public static byte[] ees3DecodeECB(byte[] key, byte[] data)
 			throws Exception
 	{
-		Key deskey = null;
+		Key deskey;
 		DESedeKeySpec spec = new DESedeKeySpec(key);
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		deskey = keyfactory.generateSecret(spec);
@@ -109,7 +109,7 @@ public class DESUtil
 	public static byte[] des3EncodeCBC(byte[] key, byte[] keyiv, byte[] data)
 			throws Exception
 	{
-		Key deskey = null;
+		Key deskey;
 		DESedeKeySpec spec = new DESedeKeySpec(key);
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		deskey = keyfactory.generateSecret(spec);
@@ -135,7 +135,7 @@ public class DESUtil
 	public static byte[] des3DecodeCBC(byte[] key, byte[] keyiv, byte[] data)
 			throws Exception
 	{
-		Key deskey = null;
+		Key deskey;
 		DESedeKeySpec spec = new DESedeKeySpec(key);
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		deskey = keyfactory.generateSecret(spec);
@@ -150,7 +150,7 @@ public class DESUtil
 	public static byte[] des3DecodeECB(byte[] key, byte[] data)
 			throws Exception
 	{
-		Key deskey = null;
+		Key deskey;
 		DESedeKeySpec spec = new DESedeKeySpec(key);
 		SecretKeyFactory keyfactory = SecretKeyFactory.getInstance("desede");
 		deskey = keyfactory.generateSecret(spec);
@@ -163,10 +163,11 @@ public class DESUtil
 	private static String byte2HexString(byte[] b)
 	{
 		String a = "";
-		for (int i = 0; i < b.length; i++) {
-			String hex = Integer.toHexString(b[i] & 0xFF)
-					.toUpperCase(Locale.US);
-			if (hex.length() == 1) {
+		for (byte aB : b)
+		{
+			String hex = Integer.toHexString(aB & 0xFF).toUpperCase(Locale.US);
+			if (hex.length() == 1)
+			{
 				hex = '0' + hex;
 			}
 			a = a + hex;

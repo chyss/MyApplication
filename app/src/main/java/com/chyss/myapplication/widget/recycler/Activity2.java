@@ -3,8 +3,6 @@ package com.chyss.myapplication.widget.recycler;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.Toast;
-
 
 import com.chyss.myapplication.BaseActivity;
 import com.chyss.myapplication.R;

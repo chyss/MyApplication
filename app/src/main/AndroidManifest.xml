@@ -3,6 +3,7 @@
           package="com.chyss.myapplication">
 
     <!-- 网络访问权限 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <!-- 收起通知栏权限 -->
     <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />

@@ -3,9 +3,9 @@ package com.chyss.myapplication.widget.recycler.bean;
 import java.util.List;
 
 /**
- * Created by baiyuliang on 2016-5-27.
+ * Created by chyss on 2017-5-5
  */
-public class InfoBean extends Object
+public class InfoBean
 {
     private String contents;
     private String title;

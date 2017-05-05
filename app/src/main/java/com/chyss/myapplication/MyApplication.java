@@ -1,7 +1,6 @@
 package com.chyss.myapplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 

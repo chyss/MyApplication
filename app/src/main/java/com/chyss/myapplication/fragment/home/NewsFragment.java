@@ -2,35 +2,25 @@ package com.chyss.myapplication.fragment.home;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import android.app.Fragment;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.utils.UnitUtils;
 import com.chyss.myapplication.utils.image.FrescoUtils;
-import com.chyss.myapplication.utils.image.ImageUtil;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.imagepipeline.request.ImageRequest;
-import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 /**
  * viewpager实现的广播循环轮播
@@ -44,7 +34,7 @@ public class NewsFragment extends Fragment
 	private static final int CYCLE_TIME = 5000;  //轮播时间
 	private LinearLayout notsLayout;
 	private ViewPager newsPager;
-	private List<ImageView> list = new ArrayList<ImageView>(); 
+	private List<ImageView> list = new ArrayList<>();
 	private int index = 0; //当前滑动到的页面，同时是自动滑动控制的标记位
 
 	@Override

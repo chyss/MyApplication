@@ -14,8 +14,6 @@ import android.widget.Adapter;
 import android.widget.FrameLayout;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.utils.Logg;
-import com.chyss.myapplication.utils.UnitUtils;
 
 /**
  * Created by dionysis_lorentzos on 5/8/14

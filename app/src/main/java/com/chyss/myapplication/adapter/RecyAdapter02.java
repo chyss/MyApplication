@@ -2,7 +2,6 @@ package com.chyss.myapplication.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.activity.RecyclerActivity01;
-import com.chyss.myapplication.data.Net;
-import com.chyss.myapplication.data.response.RecyData;
 import com.chyss.myapplication.data.response.RecyData02;
-import com.chyss.myapplication.utils.Logg;
-import com.chyss.myapplication.utils.image.FrescoUtils;
-import com.chyss.myapplication.view.MyRecyclerView;
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 

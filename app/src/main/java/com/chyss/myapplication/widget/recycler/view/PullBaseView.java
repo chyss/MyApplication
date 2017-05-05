@@ -115,7 +115,7 @@ public abstract class PullBaseView<T extends RecyclerView> extends LinearLayout
 
     }
 
-    public static final String getFormatDateString(String format) {
+    public static String getFormatDateString(String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         return sdf.format(new Date());
     }
@@ -275,11 +275,7 @@ public abstract class PullBaseView<T extends RecyclerView> extends LinearLayout
      */
     boolean isScrollTop() {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-        if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return linearLayoutManager.findFirstVisibleItemPosition() == 0;
     }
 
     /**
@@ -289,11 +285,7 @@ public abstract class PullBaseView<T extends RecyclerView> extends LinearLayout
      */
     boolean isScrollBottom() {
         LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-        if (linearLayoutManager.findLastVisibleItemPosition() == (mRecyclerView.getAdapter().getItemCount() - 1)) {
-            return true;
-        } else {
-            return false;
-        }
+        return linearLayoutManager.findLastVisibleItemPosition() == (mRecyclerView.getAdapter().getItemCount() - 1);
     }
 
     /**
@@ -496,7 +488,7 @@ public abstract class PullBaseView<T extends RecyclerView> extends LinearLayout
             p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
 
-        int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);
+        int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0, p.width);
         int lpHeight = p.height;
         int childHeightSpec;
         if (lpHeight > 0) {

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -24,7 +23,7 @@ public class KindFragment extends Fragment implements XListView.IXListViewListen
 
 	private XListView mListView;
 	private ArrayAdapter<String> mAdapter;
-	private ArrayList<String> items = new ArrayList<String>();
+	private ArrayList<String> items = new ArrayList<>();
 	private Handler mHandler;
 	private int start = 0;
 	private static int refreshCnt = 0;
@@ -51,7 +50,7 @@ public class KindFragment extends Fragment implements XListView.IXListViewListen
 		geneItems();
 		mListView = (XListView) root.findViewById(R.id.xListView);
 		mListView.setPullLoadEnable(true);
-		mAdapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item,
+		mAdapter = new ArrayAdapter<>(getActivity(), R.layout.list_item,
 				items);
 		mListView.setAdapter(mAdapter);
 		// mListView.setPullLoadEnable(false);
@@ -127,7 +126,7 @@ public class KindFragment extends Fragment implements XListView.IXListViewListen
 				items.clear();
 				geneItems();
 				// mAdapter.notifyDataSetChanged();
-				mAdapter = new ArrayAdapter<String>(getActivity(),
+				mAdapter = new ArrayAdapter<>(getActivity(),
 						R.layout.list_item, items);
 				mListView.setAdapter(mAdapter);
 				onLoad();

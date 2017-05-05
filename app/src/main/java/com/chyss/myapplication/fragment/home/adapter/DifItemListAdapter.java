@@ -7,13 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chyss.myapplication.R;
 import com.chyss.myapplication.data.response.ListData;
 import com.chyss.myapplication.utils.image.FrescoUtils;
-import com.chyss.myapplication.utils.image.ImageUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 public class DifItemListAdapter extends BaseAdapter
@@ -36,7 +34,7 @@ public class DifItemListAdapter extends BaseAdapter
 		switch (currentType)
 		{
 		case 0:
-			SpecialHolder holder = null;
+			SpecialHolder holder;
 			if (convertView == null) {
 				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_special_item, null);
@@ -56,7 +54,7 @@ public class DifItemListAdapter extends BaseAdapter
 			//ImageUtil.displayImage(listData.get(position).getImgUrl(), holder.img);
 			break;
 		case 1:
-			NormalHolder normalHolder = null;
+			NormalHolder normalHolder;
 			if (convertView == null) {
 				
 				convertView = LayoutInflater.from(context).inflate(R.layout.list_normal_item, null);

@@ -22,7 +22,7 @@ import java.util.List;
 public class RecyclerActivity02 extends BaseActivity
 {
     private RecyclerView recyclerView;
-    private List<RecyData02> datas = new ArrayList<RecyData02>();;
+    private List<RecyData02> datas = new ArrayList<>();
     private RecyAdapter02 adapter;
     private LinearLayoutManager manager;
 
@@ -52,7 +52,7 @@ public class RecyclerActivity02 extends BaseActivity
     private void initData(int type)
     {
 
-        List<RecyData> data = new ArrayList<RecyData>();
+        List<RecyData> data = new ArrayList<>();
         addDatas("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1512613434,148814465&fm=23&gp=0.jpg","name1",data);
         addDatas("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3169580764,676396808&fm=23&gp=0.jpg","name2",data);
         addDatas("https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1249988107,620775065&fm=23&gp=0.jpg","name3",data);

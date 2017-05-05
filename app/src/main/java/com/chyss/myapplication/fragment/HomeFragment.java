@@ -1,8 +1,6 @@
 package com.chyss.myapplication.fragment;
 
 import java.lang.reflect.Field;
-import java.util.logging.Logger;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;

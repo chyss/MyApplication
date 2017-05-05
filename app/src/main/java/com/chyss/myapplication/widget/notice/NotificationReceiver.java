@@ -1,17 +1,12 @@
 package com.chyss.myapplication.widget.notice;
 
-import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
 
 import com.chyss.myapplication.activity.NoticeActivity;
 import com.chyss.myapplication.utils.CommUtils;
 import com.chyss.myapplication.widget.webview.WebViewDef;
-
-import java.util.List;
 
 /**
  * 通知栏的点击事件处理类

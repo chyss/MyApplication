@@ -26,14 +26,7 @@ import com.chyss.myapplication.widget.webview.WebViewDef;
  */
 public class AcountFragment extends Fragment {
 
-	private RelativeLayout bottompop,centerpop_1,centerpop_2;  //dialog
-	private RelativeLayout notice_to_activity,notice_to_useract;
-	private RelativeLayout local_webview;
-	private RelativeLayout set_animview;
 	private AnimImageView anim_imgview;
-	private RelativeLayout input_pop;
-	private RelativeLayout to_recyclerview,to_recyclerview02,to_activity1,to_activity2;
-	private RelativeLayout swip_view;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,41 +45,41 @@ public class AcountFragment extends Fragment {
 
 	private void init(View root) {
 
-		bottompop = (RelativeLayout)root.findViewById(R.id.bottompop);
-		centerpop_1 = (RelativeLayout)root.findViewById(R.id.centerpop_1);
-		centerpop_2 = (RelativeLayout)root.findViewById(R.id.centerpop_2);
+		RelativeLayout bottompop = (RelativeLayout) root.findViewById(R.id.bottompop);
+		RelativeLayout centerpop_1 = (RelativeLayout) root.findViewById(R.id.centerpop_1);
+		RelativeLayout centerpop_2 = (RelativeLayout) root.findViewById(R.id.centerpop_2);
 		bottompop.setOnClickListener(onClickListener);
 		centerpop_1.setOnClickListener(onClickListener);
 		centerpop_2.setOnClickListener(onClickListener);
 
-		notice_to_activity = (RelativeLayout)root.findViewById(R.id.notice_to_activity);
-		notice_to_useract = (RelativeLayout)root.findViewById(R.id.notice_to_useract);
+		RelativeLayout notice_to_activity = (RelativeLayout) root.findViewById(R.id.notice_to_activity);
+		RelativeLayout notice_to_useract = (RelativeLayout) root.findViewById(R.id.notice_to_useract);
 		notice_to_activity.setOnClickListener(onClickListener);
 		notice_to_useract.setOnClickListener(onClickListener);
 
-		local_webview = (RelativeLayout)root.findViewById(R.id.local_webview);
+		RelativeLayout local_webview = (RelativeLayout) root.findViewById(R.id.local_webview);
 		local_webview.setOnClickListener(onClickListener);
 
 		anim_imgview = (AnimImageView)root.findViewById(R.id.anim_imgview);
-		set_animview = (RelativeLayout)root.findViewById(R.id.set_animview);
+		RelativeLayout set_animview = (RelativeLayout) root.findViewById(R.id.set_animview);
 		set_animview.setOnClickListener(onClickListener);
 
-		input_pop = (RelativeLayout)root.findViewById(R.id.input_pop);
+		RelativeLayout input_pop = (RelativeLayout) root.findViewById(R.id.input_pop);
 		input_pop.setOnClickListener(onClickListener);
 
-		to_recyclerview = (RelativeLayout)root.findViewById(R.id.to_recyclerview);
+		RelativeLayout to_recyclerview = (RelativeLayout) root.findViewById(R.id.to_recyclerview);
 		to_recyclerview.setOnClickListener(onClickListener);
 
-		to_recyclerview02 = (RelativeLayout)root.findViewById(R.id.to_recyclerview02);
+		RelativeLayout to_recyclerview02 = (RelativeLayout) root.findViewById(R.id.to_recyclerview02);
 		to_recyclerview02.setOnClickListener(onClickListener);
 
-		to_activity1 = (RelativeLayout)root.findViewById(R.id.recycler_refresh1);
+		RelativeLayout to_activity1 = (RelativeLayout) root.findViewById(R.id.recycler_refresh1);
 		to_activity1.setOnClickListener(onClickListener);
 
-		to_activity2 = (RelativeLayout)root.findViewById(R.id.recycler_refresh2);
+		RelativeLayout to_activity2 = (RelativeLayout) root.findViewById(R.id.recycler_refresh2);
 		to_activity2.setOnClickListener(onClickListener);
 
-		swip_view = (RelativeLayout)root.findViewById(R.id.swip_view);
+		RelativeLayout swip_view = (RelativeLayout) root.findViewById(R.id.swip_view);
 		swip_view.setOnClickListener(onClickListener);
 	}
 
