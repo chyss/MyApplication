@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.chyss.myapplication.R;
 import com.chyss.myapplication.activity.RecyclerActivity01;
@@ -16,6 +17,8 @@ import com.chyss.myapplication.view.AnimImageView;
 import com.chyss.myapplication.widget.dialog.BottomPopDialog;
 import com.chyss.myapplication.widget.dialog.CenterPopDialog;
 import com.chyss.myapplication.widget.flingswipe.SwipeActivity;
+import com.chyss.myapplication.widget.largPicture.bigshow.LargeImageViewActivity;
+import com.chyss.myapplication.widget.listview.ScrollListViewActivity;
 import com.chyss.myapplication.widget.notice.NotificationHelper;
 import com.chyss.myapplication.widget.recycler.Activity1;
 import com.chyss.myapplication.widget.recycler.Activity2;
@@ -59,13 +62,15 @@ public class AcountFragment extends Fragment {
 
 		RelativeLayout local_webview = (RelativeLayout) root.findViewById(R.id.local_webview);
 		local_webview.setOnClickListener(onClickListener);
+		RelativeLayout scroll_list = (RelativeLayout) root.findViewById(R.id.scroll_list);
+		scroll_list.setOnClickListener(onClickListener);
 
 		anim_imgview = (AnimImageView)root.findViewById(R.id.anim_imgview);
 		RelativeLayout set_animview = (RelativeLayout) root.findViewById(R.id.set_animview);
 		set_animview.setOnClickListener(onClickListener);
 
-		RelativeLayout input_pop = (RelativeLayout) root.findViewById(R.id.input_pop);
-		input_pop.setOnClickListener(onClickListener);
+		RelativeLayout large_img = (RelativeLayout) root.findViewById(R.id.large_img);
+		large_img.setOnClickListener(onClickListener);
 
 		RelativeLayout to_recyclerview = (RelativeLayout) root.findViewById(R.id.to_recyclerview);
 		to_recyclerview.setOnClickListener(onClickListener);
@@ -108,11 +113,18 @@ public class AcountFragment extends Fragment {
 				case R.id.local_webview:
 					WebViewDef.load(getActivity(),"file:///android_asset/index.html","网页");
 					break;
+				case R.id.scroll_list:
+					stepNext(ScrollListViewActivity.class);
+					break;
 				case R.id.set_animview:
+					//获取手机分配给app的最大内存
+					int memory = (int) Runtime.getRuntime().maxMemory() / 1024 / 1024;
+					Toast.makeText(getActivity(),"maxMemory : "+memory+"M",Toast.LENGTH_SHORT).show();
+
 					anim_imgview.setImageResource(R.mipmap.logo);
 					break;
-				case R.id.input_pop:
-					anim_imgview.setImageResource(R.mipmap.logo);
+				case R.id.large_img:
+					stepNext(LargeImageViewActivity.class);
 					break;
 				case R.id.to_recyclerview:
 					stepNext(RecyclerActivity01.class);

@@ -9,7 +9,7 @@ import org.json.JSONException;
 public class Net
 {
 	// 服务器的根地址
-	public static final String domain = "https://api-and.hrjk-p2p.com/v2/";  //test
+	public static final String domain = "http://api-and.hrjk-p2p.com/v2/";  //test
 
 	// 服务器版本号
 	public static final String VERSIONCODE = "37";

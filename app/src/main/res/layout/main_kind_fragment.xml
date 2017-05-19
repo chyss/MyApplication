@@ -4,29 +4,10 @@
     android:layout_height="match_parent"
     >
 
-    <!--<TextView-->
-        <!--android:id="@+id/textView1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="wechat" />-->
-
-    <com.chyss.myapplication.view.xlist.XListView
-        android:id="@+id/xListView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@+id/textView1"
-        android:cacheColorHint="#00000000" >
-
-    </com.chyss.myapplication.view.xlist.XListView>
-
-    <ImageView
-        android:id="@+id/wechat_floating_img"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
-        android:src="@mipmap/logo" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/kind_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

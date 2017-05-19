@@ -4,12 +4,16 @@ import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.QueryMap;
 import retrofit2.http.Url;
 
@@ -47,6 +51,29 @@ public interface RequestServ
 
     @GET
     Observable<String> getObservable(@Url String url, @QueryMap Map<String,String> map);
+
+
+    /**
+     * 用于图片的上传服务器
+     *
+     * @param url   请求的url
+     * @param imgs  请求时上传的图片
+     * @return
+     */
+    @Multipart
+    @POST
+    Call<String> postUploadImgs(@Url String url,@PartMap Map<String, RequestBody> imgs);
+
+    /**
+     *  name="uploadFile";filename="larg.jpg"
+     * @param url
+     * @param map
+     * @param img
+     * @return
+     */
+    @Multipart
+    @POST
+    Flowable<String> postUploadImg(@Url String url,@PartMap Map<String,String> map,@Part("uploadFile\";filename=\"larg.jpg\"") RequestBody img);
 
     //body传递
 //    @FormUrlEncoded

@@ -13,10 +13,15 @@ import com.chyss.myapplication.activity.RetrofitActivity;
 import com.chyss.myapplication.activity.RxActivity;
 import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.utils.Logg;
+import com.chyss.myapplication.widget.largPicture.compress.BigImageCompressActivity;
+import com.chyss.myapplication.widget.largPicture.compress.LocalImageCompressActivity;
+import com.chyss.myapplication.widget.opengl.OpenglActivity;
+import com.chyss.myapplication.widget.permission.GetPermissionActivity;
 
 public class FriendzoneFragment extends Fragment {
 
-	private RelativeLayout retrofit,rxjava;
+	private RelativeLayout retrofit,rxjava,opengl;
+	private RelativeLayout bigimage_compress,localimage_compress,permission_get;
 	
 
 	@Override
@@ -42,6 +47,16 @@ public class FriendzoneFragment extends Fragment {
 		retrofit.setOnClickListener(onClickListener);
 		rxjava = (RelativeLayout)root.findViewById(R.id.zone_rxjava);
 		rxjava.setOnClickListener(onClickListener);
+
+		opengl = (RelativeLayout)root.findViewById(R.id.zone_opengl);
+		opengl.setOnClickListener(onClickListener);
+
+		bigimage_compress = (RelativeLayout)root.findViewById(R.id.bigimage_compress);
+		bigimage_compress.setOnClickListener(onClickListener);
+		localimage_compress = (RelativeLayout)root.findViewById(R.id.localimage_compress);
+		localimage_compress.setOnClickListener(onClickListener);
+		permission_get = (RelativeLayout)root.findViewById(R.id.permission_get);
+		permission_get.setOnClickListener(onClickListener);
 	}
 
 	View.OnClickListener onClickListener = new View.OnClickListener()
@@ -56,6 +71,18 @@ public class FriendzoneFragment extends Fragment {
 				break;
 				case R.id.zone_rxjava:
 					stepNext(RxActivity.class);
+					break;
+				case R.id.zone_opengl:
+					stepNext(OpenglActivity.class);
+					break;
+				case R.id.bigimage_compress:
+					stepNext(BigImageCompressActivity.class);
+					break;
+				case R.id.localimage_compress:
+					stepNext(LocalImageCompressActivity.class);
+					break;
+				case R.id.permission_get:
+					stepNext(GetPermissionActivity.class);
 					break;
 				default:
 
