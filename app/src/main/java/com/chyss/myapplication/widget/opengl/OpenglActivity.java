@@ -29,7 +29,6 @@ public class OpenglActivity extends Activity {
 
         mGLView = new MglSurfaceView(this);
         setContentView(mGLView);
-
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.chyss.myapplication.widget.opengl.shape;
 
 import android.opengl.GLES20;
+import android.opengl.GLES30;
 
 import com.chyss.myapplication.widget.opengl.MglRenderer;
+import com.chyss.myapplication.widget.opengl.utils.BufferUtil;
+import com.chyss.myapplication.widget.opengl.utils.ShaderUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -14,20 +17,6 @@ import java.nio.FloatBuffer;
 
 public class Triangle
 {
-
-    private final String vertexShaderCode =
-            "attribute vec4 vPosition;" +
-                    "void main() {" +
-                    "  gl_Position = vPosition;" +
-                    "}";
-
-    private final String fragmentShaderCode =
-            "precision mediump float;" +
-                    "uniform vec4 vColor;" +
-                    "void main() {" +
-                    "  gl_FragColor = vColor;" +
-                    "}";
-
     private final int mProgram;
 
     private FloatBuffer vertexBuffer;
@@ -37,33 +26,20 @@ public class Triangle
     //设置三角形顶点数组
     static float triangleCoords[] = {   //默认按逆时针方向绘制
             0.0f,  1.0f, 0.0f, // 顶点
-            -1.0f, -0.0f, 0.0f, // 左下角
-            1.0f, -0.0f, 0.0f  // 右下角
+            -1.0f, 0.0f, 0.0f, // 左下角
+            1.0f, 0.0f, 0.0f  // 右下角
     };
 
     // 设置三角形颜色和透明度（r,g,b,a）
     float color[] = {0.0f, 1.0f, 0f, 1.0f};//绿色不透明
 
     public Triangle() {
-        // 初始化顶点字节缓冲区，用于存放形状的坐标
-        ByteBuffer bb = ByteBuffer.allocateDirect(
-                //(每个浮点数占用4个字节
-                triangleCoords.length * 4);
-        //设置使用设备硬件的原生字节序
-        bb.order(ByteOrder.nativeOrder());
-
-        //从ByteBuffer中创建一个浮点缓冲区
-        vertexBuffer = bb.asFloatBuffer();
-        // 把坐标都添加到FloatBuffer中
-        vertexBuffer.put(triangleCoords);
-        //设置buffer从第一个坐标开始读
-        vertexBuffer.position(0);
+        // 初始化顶点字节缓冲区
+        vertexBuffer = BufferUtil.getFloatBuffer(triangleCoords);
 
         // 编译shader代码
-        int vertexShader = MglRenderer.loadShader(GLES20.GL_VERTEX_SHADER,
-                vertexShaderCode);
-        int fragmentShader = MglRenderer.loadShader(GLES20.GL_FRAGMENT_SHADER,
-                fragmentShaderCode);
+        int vertexShader = ShaderUtil.getVertexShader();
+        int fragmentShader = ShaderUtil.getFragmentShader();
 
         // 创建空的OpenGL ES Program
         mProgram = GLES20.glCreateProgram();
@@ -105,8 +81,11 @@ public class Triangle
         //  绘制三角形
         GLES20.glUniform4fv(mColorHandle, 1, color, 0);
 
-        // Draw the triangle
+        // glDrawArrays 使用VetexBuffer 来绘制，顶点的顺序由vertexBuffer中的顺序指定。
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount);
+
+        //glDrawElements 可以重新定义顶点的顺序，顶点的顺序由indices Buffer 指定
+        //GLES20.glDrawElements(GLES20.GL_TRIANGLES,indices.length,GLES20.GL_UNSIGNED_INT,indexBuffer);
 
         // 禁用指向三角形的顶点数组
         GLES20.glDisableVertexAttribArray(mPositionHandle);

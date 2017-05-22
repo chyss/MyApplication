@@ -18,9 +18,9 @@ package com.chyss.myapplication.widget.opengl;
 import android.content.Context;
 import android.opengl.GLSurfaceView;
 
-public class MglSurfaceView extends GLSurfaceView {
+import com.chyss.myapplication.widget.opengl.shape.Cube;
 
-    private final MglRenderer mRenderer;
+public class MglSurfaceView extends GLSurfaceView {
 
     public MglSurfaceView(Context context) {
         super(context);
@@ -29,13 +29,12 @@ public class MglSurfaceView extends GLSurfaceView {
         setEGLContextClientVersion(2);
 
         // 设置Renderer到GLSurfaceView
-        mRenderer = new MglRenderer();
-        setRenderer(mRenderer);
+        setRenderer(new Cube(this));
 
         // render模式为只在绘制数据发生改变时才绘制view,此设置会阻止绘制GLSurfaceView的帧，直到你调用了requestRender().
-        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        //setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
 
         //以下模式会不断绘制，大概5--6 毫秒绘制一次
-//        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 }
