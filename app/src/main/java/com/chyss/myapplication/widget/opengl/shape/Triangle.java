@@ -1,14 +1,8 @@
 package com.chyss.myapplication.widget.opengl.shape;
 
 import android.opengl.GLES20;
-import android.opengl.GLES30;
-
-import com.chyss.myapplication.widget.opengl.MglRenderer;
 import com.chyss.myapplication.widget.opengl.utils.BufferUtil;
 import com.chyss.myapplication.widget.opengl.utils.ShaderUtil;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**

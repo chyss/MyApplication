@@ -34,7 +34,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 		missTitleView();
 		initView();
-
 	}
 
 	private void initView() {
