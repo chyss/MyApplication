@@ -35,6 +35,7 @@ public class Cube extends Shape{
                     "  vColor=aColor;"+
                     "}";
 
+    // precision可以用来确定默认精度修饰符。type可以是int或float或采样器类型，precision-qualifier可以是lowp, mediump, 或者highp。
     private final String fragmentShaderCode =
             "precision mediump float;" +
                     "varying vec4 vColor;" +
@@ -176,6 +177,7 @@ public class Cube extends Shape{
         //设置绘制三角形的颜色
 //        GLES20.glUniform4fv(mColorHandle, 2, color, 0);
         GLES20.glEnableVertexAttribArray(mColorHandle);
+
         GLES20.glVertexAttribPointer(mColorHandle,4,
                 GLES20.GL_FLOAT,false,
                 0,colorBuffer);
