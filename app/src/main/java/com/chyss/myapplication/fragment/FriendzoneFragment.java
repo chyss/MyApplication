@@ -16,6 +16,7 @@ import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.widget.largPicture.compress.BigImageCompressActivity;
 import com.chyss.myapplication.widget.largPicture.compress.LocalImageCompressActivity;
 import com.chyss.myapplication.widget.opengl.OpenglActivity;
+import com.chyss.myapplication.widget.opengl.OpenglSelectActivity;
 import com.chyss.myapplication.widget.permission.GetPermissionActivity;
 
 public class FriendzoneFragment extends Fragment {
@@ -73,7 +74,7 @@ public class FriendzoneFragment extends Fragment {
 					stepNext(RxActivity.class);
 					break;
 				case R.id.zone_opengl:
-					stepNext(OpenglActivity.class);
+					stepNext(OpenglSelectActivity.class);
 					break;
 				case R.id.bigimage_compress:
 					stepNext(BigImageCompressActivity.class);

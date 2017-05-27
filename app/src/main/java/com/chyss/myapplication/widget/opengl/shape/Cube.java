@@ -1,17 +1,10 @@
-/*
- *
- * Cube.java
- * 
- * Created by Wuwang on 2016/9/30
- */
 package com.chyss.myapplication.widget.opengl.shape;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
-import android.view.View;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import com.chyss.myapplication.widget.opengl.utils.BufferUtil;
+
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
@@ -19,169 +12,140 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 /**
- * Description: 立方体
+ * @author chyss 2017-05-05
  */
-public class Cube extends Shape{
 
-    private FloatBuffer vertexBuffer,colorBuffer;
-    private ShortBuffer indexBuffer;
+public class Cube extends Shape
+{
     private final String vertexShaderCode =
-            "attribute vec4 vPosition;" +
+            "attribute vec4 vPosition;"+
                     "uniform mat4 vMatrix;"+
-                    "varying  vec4 vColor;"+
+                    "varying vec4 vColor;"+
                     "attribute vec4 aColor;"+
-                    "void main() {" +
-                    "  gl_Position = vMatrix*vPosition;" +
-                    "  vColor=aColor;"+
+                    "void main(){"+
+                    " gl_Position = vMatrix*vPosition;"+
+                    "vColor = aColor;"+
                     "}";
 
     private final String fragmentShaderCode =
-            "precision mediump float;" +
-                    "varying vec4 vColor;" +
-                    "void main() {" +
-                    "  gl_FragColor = vColor;" +
+            "precision mediump float;"+
+                    "varying vec4 vColor;"+
+                    "void main(){"+
+                    " gl_FragColor = vColor;"+
                     "}";
 
-    private int mProgram;
+    private float[] projectMatrix = new float[16];
+    private float[] viewMatrix = new float[16];
+    private float[] mVMatrix = new float[16];
 
-    final int COORDS_PER_VERTEX = 3;
-    final float cubePositions[] = {
-            -1.0f,1.0f,1.0f,    //正面左上0
-            -1.0f,-1.0f,1.0f,   //正面左下1
-            1.0f,-1.0f,1.0f,    //正面右下2
-            1.0f,1.0f,1.0f,     //正面右上3
-            -1.0f,1.0f,-1.0f,    //反面左上4
-            -1.0f,-1.0f,-1.0f,   //反面左下5
-            1.0f,-1.0f,-1.0f,    //反面右下6
-            1.0f,1.0f,-1.0f,     //反面右上7
-    };
-    final short index[]={
-            6,7,4,6,4,5,    //后面
-            6,3,7,6,2,3,    //右面
-            6,5,1,6,1,2,    //下面
-            0,3,2,0,2,1,    //正面
-            0,1,5,0,5,4,    //左面
-            0,7,3,0,4,7,    //上面
-    };
-
-    float color[] = {
-            0f,1f,0f,1f,
-            0f,1f,0f,1f,
-            0f,1f,0f,1f,
-            0f,1f,0f,1f,
-            1f,0f,0f,1f,
-            1f,0f,0f,1f,
-            1f,0f,0f,1f,
-            1f,0f,0f,1f,
-    };
-
+    private int mMatrixHandle;
     private int mPositionHandle;
     private int mColorHandle;
 
-    private float[] mViewMatrix=new float[16];
-    private float[] mProjectMatrix=new float[16];
-    private float[] mMVPMatrix=new float[16];
+    private FloatBuffer vertexBuffer;
+    private ShortBuffer indexBuffer;
+    private FloatBuffer colorBuffer;
+    private int program;
 
-    private int mMatrixHandler;
+    private int vertexShader,fragmentShader;
 
-    //顶点个数
-    private final int vertexCount = cubePositions.length / COORDS_PER_VERTEX;
-    //顶点之间的偏移量
-    private final int vertexStride = COORDS_PER_VERTEX * 4; // 每个顶点四个字节
+    private float s = 0.8f;
+    private float[] coords = {
+            -s,s,-s,    // 0
+            -s,s,s,     // 1
+            s,s,s,      // 2
+            s,s,-s,     // 3
+            -s,-s,-s,   // 4
+            -s,-s,s,    // 5
+            s,-s,s,     // 6
+            s,-s,-s    // 7
+    };
 
+    private short[] index = {
 
-    public Cube(View mView) {
-        super(mView);
-    }
+            0,2,3,
+            0,1,2,
+            1,5,2,
+            2,5,6,
+            2,6,7,
+            2,7,3,
+            3,7,4,
+            3,4,0,
+            0,4,1,
+            1,4,5,
+            5,4,6,
+            6,4,7
+    };
+
+    private float[] color = {
+            0f,0f,1f,1.0f,
+            0f,1f,0f,1.0f,
+            0f,1f,0f,1.0f,
+            0f,0f,1f,1.0f,
+            0f,0f,1f,1.0f,
+            1.0f,0f,0f,1.0f,
+            1.0f,0f,0f,1.0f,
+            0f,0f,1f,1.0f
+
+    };
 
     @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        GLES20.glClearColor(0.5f,0.5f,0.5f,1.0f);
-        //开启深度测试
+    public void onSurfaceCreated(GL10 gl, EGLConfig config)
+    {
+        GLES20.glClearColor(1f,1f,1f,1.0f);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
-        ByteBuffer bb = ByteBuffer.allocateDirect(
-                cubePositions.length * 4);
-        bb.order(ByteOrder.nativeOrder());
-        vertexBuffer = bb.asFloatBuffer();
-        vertexBuffer.put(cubePositions);
-        vertexBuffer.position(0);
+        vertexBuffer = BufferUtil.getFloatBuffer(coords);
+        indexBuffer = BufferUtil.getShortBuffer(index);
+        colorBuffer = BufferUtil.getFloatBuffer(color);
 
-        ByteBuffer dd = ByteBuffer.allocateDirect(
-                color.length * 4);
-        dd.order(ByteOrder.nativeOrder());
-        colorBuffer = dd.asFloatBuffer();
-        colorBuffer.put(color);
-        colorBuffer.position(0);
+        vertexShader = GLES20.glCreateShader(GLES20.GL_VERTEX_SHADER);
+        GLES20.glShaderSource(vertexShader,vertexShaderCode);
+        GLES20.glCompileShader(vertexShader);
 
-        ByteBuffer cc= ByteBuffer.allocateDirect(index.length*2);
-        cc.order(ByteOrder.nativeOrder());
-        indexBuffer=cc.asShortBuffer();
-        indexBuffer.put(index);
-        indexBuffer.position(0);
-        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER,
-                vertexShaderCode);
-        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER,
-                fragmentShaderCode);
-        //创建一个空的OpenGLES程序
-        mProgram = GLES20.glCreateProgram();
-        //将顶点着色器加入到程序
-        GLES20.glAttachShader(mProgram, vertexShader);
-        //将片元着色器加入到程序中
-        GLES20.glAttachShader(mProgram, fragmentShader);
-        //连接到着色器程序
-        GLES20.glLinkProgram(mProgram);
+        fragmentShader = GLES20.glCreateShader(GLES20.GL_FRAGMENT_SHADER);
+        GLES20.glShaderSource(fragmentShader,fragmentShaderCode);
+        GLES20.glCompileShader(fragmentShader);
+
+        program = GLES20.glCreateProgram();
+        GLES20.glAttachShader(program,vertexShader);
+        GLES20.glAttachShader(program,fragmentShader);
+        GLES20.glLinkProgram(program);
     }
 
     @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
+    public void onSurfaceChanged(GL10 gl, int width, int height)
+    {
         GLES20.glViewport(0,0,width,height);
-        //计算宽高比
-        float ratio=(float)width/height;
-        //设置透视投影frustumM(float[] m, int offset,
-        // float left, float right,     原点到左右的距离 x
-        // float bottom, float top,     原点到上下的距离 y
-        // float near, float far)       原点到屏幕深度的空间,需要大于0 z
-        Matrix.frustumM(mProjectMatrix, 0, -ratio, ratio, -1, 1, 3, 30);
-        //设置相机位置setLookAtM(float[] rm, int rmOffset,
-        // float eyeX, float eyeY, float eyeZ, 摄像机的位置
-        //float centerX, float centerY, float centerZ, 物体的位置
-        // float upX, float upY,float upZ)  相机正上方向量
-        Matrix.setLookAtM(mViewMatrix, 0, 10.0f, 10.0f, 10.0f, 0f, 0f, 0f, 0.0f, 1.0f, 0.0f);
-        //计算变换矩阵 mMVPMatrix
-        Matrix.multiplyMM(mMVPMatrix,0,mProjectMatrix,0,mViewMatrix,0);
+
+        float ratio = (float)width/height;
+        Matrix.frustumM(projectMatrix,0,-ratio,ratio,-1,1,3,30);
+        Matrix.setLookAtM(viewMatrix,0,5f,5f,10f,0f,0f,0f,0f,0f,1f);
+        Matrix.multiplyMM(mVMatrix,0,projectMatrix,0,viewMatrix,0);
     }
 
     @Override
-    public void onDrawFrame(GL10 gl) {
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT| GLES20.GL_DEPTH_BUFFER_BIT);
-        //将程序加入到OpenGLES2.0环境
-        GLES20.glUseProgram(mProgram);
+    public void onDrawFrame(GL10 gl)
+    {
+        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT|GLES20.GL_COLOR_BUFFER_BIT);
 
-        //获取变换矩阵vMatrix成员句柄
-        mMatrixHandler= GLES20.glGetUniformLocation(mProgram,"vMatrix");
-        //指定vMatrix的值
-        GLES20.glUniformMatrix4fv(mMatrixHandler,1,false,mMVPMatrix,0);
+        GLES20.glUseProgram(program);
+        mMatrixHandle = GLES20.glGetUniformLocation(program,"vMatrix");
+        GLES20.glUniformMatrix4fv(mMatrixHandle,1,false,mVMatrix,0);
 
-        //获取顶点着色器的vPosition成员句柄
-        mPositionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition");
-        //启用三角形顶点的句柄
+        mPositionHandle = GLES20.glGetAttribLocation(program,"vPosition");
         GLES20.glEnableVertexAttribArray(mPositionHandle);
-        //准备三角形的坐标数据
-        GLES20.glVertexAttribPointer(mPositionHandle, 3,
-                GLES20.GL_FLOAT, false,
-                0, vertexBuffer);
-        //获取片元着色器的vColor成员的句柄
-        mColorHandle = GLES20.glGetAttribLocation(mProgram, "aColor");
-        //设置绘制三角形的颜色
-//        GLES20.glUniform4fv(mColorHandle, 2, color, 0);
+        GLES20.glVertexAttribPointer(mPositionHandle,3,GLES20.GL_FLOAT,false,0,vertexBuffer);
+
+//        mColorHandle = GLES20.glGetUniformLocation(program,"vColor");
+//        GLES20.glUniform4fv(mColorHandle, 1, color, 0);
+
+        mColorHandle = GLES20.glGetAttribLocation(program,"aColor");
         GLES20.glEnableVertexAttribArray(mColorHandle);
-        GLES20.glVertexAttribPointer(mColorHandle,4,
-                GLES20.GL_FLOAT,false,
-                0,colorBuffer);
-        //索引法绘制正方体
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES,index.length, GLES20.GL_UNSIGNED_SHORT,indexBuffer);
-        //禁止顶点数组的句柄
+        GLES20.glVertexAttribPointer(mColorHandle,4,GLES20.GL_FLOAT,false,0,colorBuffer);
+
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES,index.length,GLES20.GL_UNSIGNED_SHORT,indexBuffer);
+
         GLES20.glDisableVertexAttribArray(mPositionHandle);
     }
 }

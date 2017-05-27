@@ -6,7 +6,7 @@ import android.content.Intent;
 
 import com.chyss.myapplication.activity.NoticeActivity;
 import com.chyss.myapplication.utils.CommUtils;
-import com.chyss.myapplication.widget.webview.WebViewDef;
+import com.chyss.myapplication.widget.webview.WebView;
 
 /**
  * 通知栏的点击事件处理类
@@ -54,7 +54,7 @@ public class NotificationReceiver extends BroadcastReceiver
         }
         else if("to_web".equals(afterOpen))
         {
-            WebViewDef.loadFromNotice(context,url,title);
+            WebView.loadFromNotice(context,url,title);
         }
         else if("to_app".equals(afterOpen))
         {

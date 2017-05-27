@@ -22,7 +22,7 @@ import com.chyss.myapplication.widget.listview.ScrollListViewActivity;
 import com.chyss.myapplication.widget.notice.NotificationHelper;
 import com.chyss.myapplication.widget.recycler.Activity1;
 import com.chyss.myapplication.widget.recycler.Activity2;
-import com.chyss.myapplication.widget.webview.WebViewDef;
+import com.chyss.myapplication.widget.webview.WebView;
 
 /**
  * 展示各类UI的设置
@@ -111,7 +111,7 @@ public class AcountFragment extends Fragment {
 					NotificationHelper.sendNotice(getActivity(),"旧时代的过客","匆匆那年，我们都改变了原来的模样！","life where are you?","to_web","","http://www.baidu.com",R.mipmap.ic_launcher,R.mipmap.logo);
 					break;
 				case R.id.local_webview:
-					WebViewDef.load(getActivity(),"file:///android_asset/index.html","网页");
+					WebView.load(getActivity(),"file:///android_asset/index.html","网页");
 					break;
 				case R.id.scroll_list:
 					stepNext(ScrollListViewActivity.class);

@@ -1,33 +1,22 @@
-/*
- *
- * Shape.java
- * 
- * Created by Wuwang on 2016/9/30
- */
 package com.chyss.myapplication.widget.opengl.shape;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.view.View;
 
 /**
- * Description:
+ * @author chyss 2017-05-05
  */
-public abstract class Shape implements GLSurfaceView.Renderer {
 
-    protected View mView;
-
-    public Shape(View mView){
-        this.mView=mView;
-    }
-
-    public int loadShader(int type, String shaderCode){
-        //根据type创建顶点着色器或者片元着色器
+public abstract class Shape implements GLSurfaceView.Renderer
+{
+    public static int loadShader(int type, String shaderCode){
+        //vertex shader类型(GLES20.GL_VERTEX_SHADER)或fragment shader类型(GLES20.GL_FRAGMENT_SHADER)
         int shader = GLES20.glCreateShader(type);
-        //将资源加入到着色器中，并编译
+
+        // 将源码添加到shader并编译它
         GLES20.glShaderSource(shader, shaderCode);
         GLES20.glCompileShader(shader);
+
         return shader;
     }
-
 }

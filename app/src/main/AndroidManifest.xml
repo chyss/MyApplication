@@ -40,7 +40,7 @@
         </activity>
 
         <activity
-            android:name=".widget.webview.WebViewDef"
+            android:name=".widget.webview.WebView"
             android:screenOrientation="portrait">
         </activity>
         <activity
@@ -118,6 +118,11 @@
 
         <activity
             android:name=".widget.opengl.OpenglActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".widget.opengl.OpenglSelectActivity"
             android:screenOrientation="portrait">
         </activity>
 

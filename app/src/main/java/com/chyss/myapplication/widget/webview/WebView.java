@@ -13,20 +13,19 @@ import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.chyss.myapplication.BaseActivity;
 import com.chyss.myapplication.R;
 import com.chyss.myapplication.widget.js.JavaScriptObject;
 
-public class WebViewDef extends BaseActivity
+public class WebView extends BaseActivity
 {
 	
-	private WebView webView;
+	private android.webkit.WebView webView;
 	private String url = "";
 	private String title = "";
-	private ProgressbarWeb progressBar;
+	private WebProgress progressBar;
 	
 	/**
 	 * 自定义webview的调用入口
@@ -36,7 +35,7 @@ public class WebViewDef extends BaseActivity
 	 */
 	public static void load(Activity context,String url,String title)
 	{
-		Intent intent = new Intent(context, WebViewDef.class);
+		Intent intent = new Intent(context, WebView.class);
 		intent.putExtra("url", url);
 		intent.putExtra("title", title);
 		context.startActivity(intent);
@@ -51,7 +50,7 @@ public class WebViewDef extends BaseActivity
 	 */
 	public static void loadFromNotice(Context context,String url,String title)
 	{       
-		Intent intent = new Intent(context, WebViewDef.class);
+		Intent intent = new Intent(context, WebView.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtra("url", url); 
 		intent.putExtra("title", title);
@@ -78,14 +77,14 @@ public class WebViewDef extends BaseActivity
 	}
 	
 	private void initView() {
-		progressBar = (ProgressbarWeb) findViewById(R.id.webview_progress);
+		progressBar = (WebProgress) findViewById(R.id.webview_progress);
 		
 	}
 
 	@SuppressLint({ "SetJavaScriptEnabled", "NewApi", "JavascriptInterface" }) 
 	private void initWebview() {
 		
-		webView = (WebView) findViewById(R.id.webview_def);
+		webView = (android.webkit.WebView) findViewById(R.id.webview_def);
 		//webview的编码格式
 		webView.getSettings().setDefaultTextEncodingName("UTF-8");
 		//支持javascript交互
@@ -97,7 +96,7 @@ public class WebViewDef extends BaseActivity
 		//缩放权限
 		webView.getSettings().setSupportZoom(true);
 		//android与js交互接口
-		webView.addJavascriptInterface(new JavaScriptObject(WebViewDef.this), JavaScriptObject.obj);
+		webView.addJavascriptInterface(new JavaScriptObject(WebView.this), JavaScriptObject.obj);
 		//告诉WebView先不要自动加载图片，等页面finish后再发起图片加载。
 		if(Build.VERSION.SDK_INT >= 19) {
 	        webView.getSettings().setLoadsImagesAutomatically(true);
@@ -119,8 +118,8 @@ public class WebViewDef extends BaseActivity
 	{
 		//开始加载页面调用
 		@Override
-		public void onPageStarted(WebView view, String url, Bitmap favicon) {
-			//Toast.makeText(WebViewDef.this, "开始加载页面", 2000).show();
+		public void onPageStarted(android.webkit.WebView view, String url, Bitmap favicon) {
+			//Toast.makeText(WebView.this, "开始加载页面", 2000).show();
 			
 			progressBar.setVisibility(View.VISIBLE);
 			super.onPageStarted(view, url, favicon);
@@ -128,8 +127,8 @@ public class WebViewDef extends BaseActivity
 		
 		//页面加载完成调用
 		@Override
-		public void onPageFinished(WebView view, String url) {
-			//Toast.makeText(WebViewDef.this, "页面加载完成", 1000).show();
+		public void onPageFinished(android.webkit.WebView view, String url) {
+			//Toast.makeText(WebView.this, "页面加载完成", 1000).show();
 			//告诉WebView先不要自动加载图片，等页面finish后再发起图片加载。
 //			if(!webView.getSettings().getLoadsImagesAutomatically()) {
 //		        webView.getSettings().setLoadsImagesAutomatically(true);
@@ -139,8 +138,8 @@ public class WebViewDef extends BaseActivity
 		
 		//加载页面失败时处理
 		@Override
-		public void onReceivedError(WebView view, int errorCode,
-				String description, String failingUrl) {
+		public void onReceivedError(android.webkit.WebView view, int errorCode,
+									String description, String failingUrl) {
 			
 			super.onReceivedError(view, errorCode, description, failingUrl);
 			
@@ -152,8 +151,8 @@ public class WebViewDef extends BaseActivity
 		 * 处理https请求，为WebView处理ssl证书设置,WebView默认是不处理https请求的，页面显示空白
 		 */
 		@Override
-		public void onReceivedSslError(WebView view, SslErrorHandler handler,
-				SslError error) {
+		public void onReceivedSslError(android.webkit.WebView view, SslErrorHandler handler,
+									   SslError error) {
 			
 			handler.proceed(); // 接受信任所有网站的证书
 		}
@@ -166,7 +165,7 @@ public class WebViewDef extends BaseActivity
 		 * while return false means the current WebView handles the url.
 		 */
 		@Override
-		public boolean shouldOverrideUrlLoading(WebView view, String url) {
+		public boolean shouldOverrideUrlLoading(android.webkit.WebView view, String url) {
 			//view.loadUrl(url);
 			return false;
 		}
@@ -180,7 +179,7 @@ public class WebViewDef extends BaseActivity
 	{
 		//页面加载进度设置
 		@Override
-		public void onProgressChanged(WebView view, int newProgress) {
+		public void onProgressChanged(android.webkit.WebView view, int newProgress) {
 			
 			progressBar.setProg(newProgress);
 		}

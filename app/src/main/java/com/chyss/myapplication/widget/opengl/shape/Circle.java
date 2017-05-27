@@ -1,10 +1,13 @@
 package com.chyss.myapplication.widget.opengl.shape;
 
 import android.opengl.GLES20;
+import android.opengl.Matrix;
 
 import com.chyss.myapplication.widget.opengl.utils.BufferUtil;
 
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -12,13 +15,14 @@ import javax.microedition.khronos.opengles.GL10;
 /**
  * @author chyss 2017-05-23
  */
-public class Triangle extends Shape
+public class Circle extends Shape
 {
     //gl_Position : 输出属性-变换后的顶点的位置，用于后面的固定的裁剪等操作。所有的顶点着色器都必须写这个值。
     private static final String vertexShaderCode =
             "attribute vec4 vPosition;" +
+                    "uniform mat4 vMatrix;"+
                     "void main() {" +
-                    "  gl_Position = vPosition;" +
+                    "  gl_Position = vMatrix * vPosition;" +
                     "}";
 
     //gl_FragColor : 输出的颜色用于随后的像素操作
@@ -34,17 +38,22 @@ public class Triangle extends Shape
     //OpenGL ES Program
     private int program;
     //设置三角形顶点数组
-    private float coords[] = {   // 默认按逆时针方向绘制
-            0.0f,  0.5f, 0.0f,
-            -0.5f, 0.0f, 0.0f,
-            0.5f, 0.0f, 0.0f
-    };
+    private float[] coords;
+
+    private float r = 0.8f;
 
     // 设置三角形颜色和透明度（r,g,b,a），蓝色不透明
-    private float color[] = {0.0f, 0.0f, 1.0f, 1.0f};
+    private float color[] = {0.0f, 1.0f, 0.0f, 1.0f};
 
     private int positionHandle;
     private int colorHandle;
+    private int vMatrixHandle;
+
+    float[] projectMatrix = new float[16];
+    float[] viewMatrix = new float[16];
+    float[] vPMatrix = new float[16];
+
+    private float height = 0.0f;
 
     /**
      * 仅调用一次，用于设置view的OpenGLES环境
@@ -53,7 +62,9 @@ public class Triangle extends Shape
     public void onSurfaceCreated(GL10 gl, EGLConfig config)
     {
         //设置清屏背景色RGBA,白色不透明
-        GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+        //GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+//        GLES20.glEnable(GLES20.GL_DEPTH_TEST);
+        initCoords();
 
         // 初始化顶点字节缓冲区
         vertexBuffer = BufferUtil.getFloatBuffer(coords);
@@ -75,6 +86,25 @@ public class Triangle extends Shape
         GLES20.glLinkProgram(program);
     }
 
+    private void initCoords()
+    {
+        List<Float> list = new ArrayList<Float>();
+        list.add(0.0f);
+        list.add(0.0f);
+        list.add(height);
+        for (double i = 0; i <= 360; i++)
+        {
+            list.add((float)(r*Math.sin(i*Math.PI/180f)));
+            list.add((float)(r*Math.cos(i*Math.PI/180f)));
+            list.add(height);
+        }
+        coords = new float[list.size()];
+        for (int j = 0; j < list.size(); j++)
+        {
+            coords[j] = list.get(j);
+        }
+    }
+
     /**
      * 如果view的几何形状发生变化就调用，例如当竖屏变为横屏时
      */
@@ -82,7 +112,12 @@ public class Triangle extends Shape
     public void onSurfaceChanged(GL10 gl, int width, int height)
     {
         //设置视窗大小及位置
-        GLES20.glViewport(0, 0, width, height);
+        //GLES20.glViewport(0, 0, width, height);
+
+        float radio = (float)width/height;
+        Matrix.frustumM(projectMatrix,0,-radio,radio,-1,1,1,10);
+        Matrix.setLookAtM(viewMatrix,0,0f,0f,6f,0f,0f,0f,0f,1f,0f);
+        Matrix.multiplyMM(vPMatrix,0,projectMatrix,0,viewMatrix,0);
     }
 
     /**
@@ -92,10 +127,13 @@ public class Triangle extends Shape
     public void onDrawFrame(GL10 gl)
     {
         //清除深度缓冲与颜色缓冲
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
+        //GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
 
         // 添加program到OpenGL ES环境中
         GLES20.glUseProgram(program);
+
+        vMatrixHandle = GLES20.glGetUniformLocation(program,"vMatrix");
+        GLES20.glUniformMatrix4fv(vMatrixHandle,1,false,vPMatrix,0);
 
         // 获取指向vertex shader的成员vPosition的handle
         positionHandle = GLES20.glGetAttribLocation(program, "vPosition");
@@ -119,12 +157,27 @@ public class Triangle extends Shape
 
         // glDrawArrays 使用VetexBuffer 来绘制，顶点的顺序由vertexBuffer中的顺序指定。
         // GLES20.GL_TRIANGLES 绘制的类型为3角形
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, coords.length / 3);
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, coords.length / 3);
 
         //glDrawElements 可以重新定义顶点的顺序，顶点的顺序由indices Buffer 指定
         //GLES20.glDrawElements(GLES20.GL_TRIANGLES,indices.length,GLES20.GL_UNSIGNED_INT,indexBuffer);
 
         // 禁用指向三角形的顶点数组
         GLES20.glDisableVertexAttribArray(positionHandle);
+    }
+
+    public void setvPMatrix(float[] vPMatrix)
+    {
+        this.vPMatrix = vPMatrix;
+    }
+
+    public void setHeight(float height)
+    {
+        this.height = height;
+    }
+
+    public void setColor(float[] color)
+    {
+        this.color = color;
     }
 }

@@ -9,7 +9,7 @@ import com.chyss.myapplication.widget.dialog.CenterPopDialog;
 /**
  * JS对应的对象类，用于处理js调用android的方法，方法需标示@JavascriptInterface，否则不能调用到；
  * webview中添加：
- * webView.addJavascriptInterface(new JavaScriptObject(WebViewDef.this), JavaScriptObject.obj);
+ * webView.addJavascriptInterface(new JavaScriptObject(WebView.this), JavaScriptObject.obj);
  * js中调用：
  * javaObj.funFromAndroid();
  * 

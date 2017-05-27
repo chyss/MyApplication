@@ -21,25 +21,28 @@ import android.os.Bundle;
 
 public class OpenglActivity extends Activity {
 
-    private GLSurfaceView mGLView;
+    private GLSurfaceView glSurfaceView;
+    private int type;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mGLView = new MglSurfaceView(this);
-        setContentView(mGLView);
+        type = getIntent().getIntExtra("type",0);
+        //设置GLSurfaceView为contentview
+        glSurfaceView = new OpenglSurfaceView(this,type);
+        setContentView(glSurfaceView);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mGLView.onPause();
+        glSurfaceView.onPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mGLView.onResume();
+        glSurfaceView.onResume();
     }
 }

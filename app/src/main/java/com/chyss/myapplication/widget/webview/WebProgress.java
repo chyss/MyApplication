@@ -13,14 +13,14 @@ import android.widget.ProgressBar;
  * @author chyss 2016.7.6
  *
  */
-public class ProgressbarWeb extends ProgressBar{
+public class WebProgress extends ProgressBar{
 	
 	public static final int TIME = 500; //缓冲动画时间
 	private Context context;
 	public int currentPoint = 0;
 	private ValueAnimator anim;
 	
-	public ProgressbarWeb(Context context, AttributeSet attrs) {
+	public WebProgress(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
 	}

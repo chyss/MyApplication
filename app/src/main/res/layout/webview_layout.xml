@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.chyss.myapplication.widget.webview.ProgressbarWeb
+    <com.chyss.myapplication.widget.webview.WebProgress
         android:id="@+id/webview_progress"
         style="?android:attr/progressBarStyleHorizontal"
         android:progressDrawable="@drawable/progress_horizontal_style"
