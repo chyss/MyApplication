@@ -25,12 +25,13 @@ public class OpenglSelectActivity extends BaseActivity
 
         surfaceView = (OpenglSurfaceView)findViewById(R.id.opengl_glsurface);
 
-
         findViewById(R.id.opengl_triangle).setOnClickListener(onClickListener);
         findViewById(R.id.opengl_cube).setOnClickListener(onClickListener);
         findViewById(R.id.opengl_circle).setOnClickListener(onClickListener);
         findViewById(R.id.opengl_cone).setOnClickListener(onClickListener);
         findViewById(R.id.opengl_Cylinder).setOnClickListener(onClickListener);
+        findViewById(R.id.opengl_ball).setOnClickListener(onClickListener);
+        findViewById(R.id.opengl_balllight).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener()
@@ -54,6 +55,12 @@ public class OpenglSelectActivity extends BaseActivity
                     break;
                 case R.id.opengl_Cylinder:
                     stepNext(OpenglActivity.class,5);
+                    break;
+                case R.id.opengl_ball:
+                    stepNext(OpenglActivity.class,6);
+                    break;
+                case R.id.opengl_balllight:
+                    stepNext(OpenglActivity.class,7);
                     break;
             }
         }

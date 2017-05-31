@@ -22,6 +22,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import com.chyss.myapplication.R;
+import com.chyss.myapplication.widget.opengl.shape.Ball;
+import com.chyss.myapplication.widget.opengl.shape.BallLight;
 import com.chyss.myapplication.widget.opengl.shape.Circle;
 import com.chyss.myapplication.widget.opengl.shape.Cone;
 import com.chyss.myapplication.widget.opengl.shape.Cube;
@@ -75,6 +77,12 @@ public class OpenglSurfaceView extends GLSurfaceView {
                 break;
             case 5:
                 render = new Cylinder();
+                break;
+            case 6:
+                render = new Ball();
+                break;
+            case 7:
+                render = new BallLight(this);
                 break;
             default:
                 render = new Cube();

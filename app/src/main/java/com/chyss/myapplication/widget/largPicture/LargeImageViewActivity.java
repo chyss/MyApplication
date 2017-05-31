@@ -28,8 +28,5 @@ public class LargeImageViewActivity extends AppCompatActivity
         {
             e.printStackTrace();
         }
-
-
     }
-
 }
