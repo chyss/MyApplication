@@ -1,216 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <com.chyss.myapplication.widget.opengl.OpenglSurfaceView
-        android:id="@+id/opengl_glsurface"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:renderType="4"
-    />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="#e0e0e0"
-    />
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
     <LinearLayout
-                  android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="100dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:id="@+id/opengl_triangle"
+        <com.chyss.myapplication.widget.opengl.OpenglSurfaceView
+            android:id="@+id/opengl_glsurface"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
+            android:layout_height="200dp"
+            app:renderType="8"
+        />
 
-            <TextView
-                android:text="Triangle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-        </RelativeLayout>
         <View
-            android:layout_width="0.33dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
             android:background="#e0e0e0"
         />
-        <RelativeLayout
-            android:id="@+id/opengl_cube"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
+            android:layout_height="100dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:text="Cube"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+            <RelativeLayout
+                android:id="@+id/opengl_triangle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Triangle"
+                />
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
             />
+            <RelativeLayout
+                android:id="@+id/opengl_cube"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Cube"
+                />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
+            />
+            <RelativeLayout
+                android:id="@+id/opengl_circle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Circle"
+                />
+
+            </RelativeLayout>
+        </LinearLayout>
         <View
-            android:layout_width="0.33dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
             android:background="#e0e0e0"
         />
-        <RelativeLayout
-            android:id="@+id/opengl_circle"
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
+            android:layout_height="100dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:text="Circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+            <RelativeLayout
+                android:id="@+id/opengl_cone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Cone"
+                />
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
             />
+            <RelativeLayout
+                android:id="@+id/opengl_Cylinder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Cylinder"
+                />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
+            />
+            <RelativeLayout
+                android:id="@+id/opengl_ball"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Ball"
+                />
+
+            </RelativeLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#e0e0e0"
+        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/opengl_balllight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="BallLight"
+                />
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
+            />
+            <RelativeLayout
+                android:id="@+id/opengl_cubetexture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="CubeTexture"
+                />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
+            />
+            <RelativeLayout
+                android:id="@+id/opengl_square"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Square"
+                />
+
+            </RelativeLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#e0e0e0"
+        />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/opengl_cubesquaretexture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="CubSquare"
+                />
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
+            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text=""
+                />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="0.33dp"
+                android:layout_height="match_parent"
+                android:background="#e0e0e0"
+            />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_bg_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text=""
+                />
+
+            </RelativeLayout>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#e0e0e0"
+        />
+
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="#e0e0e0"
-    />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-
-        <RelativeLayout
-            android:id="@+id/opengl_cone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
-
-            <TextView
-                android:text="Cone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-        </RelativeLayout>
-        <View
-            android:layout_width="0.33dp"
-            android:layout_height="match_parent"
-            android:background="#e0e0e0"
-        />
-        <RelativeLayout
-            android:id="@+id/opengl_Cylinder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
-
-            <TextView
-                android:text="Cylinder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-
-        </RelativeLayout>
-        <View
-            android:layout_width="0.33dp"
-            android:layout_height="match_parent"
-            android:background="#e0e0e0"
-        />
-        <RelativeLayout
-            android:id="@+id/opengl_ball"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
-
-            <TextView
-                android:text="Ball"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="#e0e0e0"
-    />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-
-        <RelativeLayout
-            android:id="@+id/opengl_balllight"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
-
-            <TextView
-                android:text="BallLight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-        </RelativeLayout>
-        <View
-            android:layout_width="0.33dp"
-            android:layout_height="match_parent"
-            android:background="#e0e0e0"
-        />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
-
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-
-        </RelativeLayout>
-        <View
-            android:layout_width="0.33dp"
-            android:layout_height="match_parent"
-            android:background="#e0e0e0"
-        />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/btn_bg_selector"
-            android:layout_weight="1">
-
-            <TextView
-                android:text=""
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-            />
-
-        </RelativeLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:background="#e0e0e0"
-    />
-
-</LinearLayout>
+</ScrollView>

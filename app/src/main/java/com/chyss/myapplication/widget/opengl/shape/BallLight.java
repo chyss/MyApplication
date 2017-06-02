@@ -99,8 +99,9 @@ public class BallLight extends Shape
         GLES20.glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         GLES20.glEnable(GLES20.GL_DEPTH_TEST);
 
+//        GLES20.glFrontFace(GLES20.GL_CCW);//设置顺时针卷染为正面.
 //        GLES20.glEnable(GLES20.GL_CULL_FACE);//打开背面剪裁
-//        GLES20.glFrontFace(GLES20.GL_CW);//设置顺时针卷染为正面.
+//        GLES20.glCullFace(GLES20.GL_BACK); //剪裁背面
 
         // 编译shader代码
         int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, AssetsUtil.loadFromAssetsFile("shader/vBallWithLight.sh",view.getResources()));

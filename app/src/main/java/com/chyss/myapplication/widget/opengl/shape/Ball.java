@@ -191,5 +191,6 @@ public class Ball extends Shape
 
         // 禁用指向三角形的顶点数组
         GLES20.glDisableVertexAttribArray(positionHandle);
+        GLES20.glDisableVertexAttribArray(colorHandle);
     }
 }
