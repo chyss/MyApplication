@@ -1,6 +1,7 @@
 package com.chyss.myapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -139,19 +140,19 @@ public class BaseActivity extends Activity {
 	protected void onDestroy() {
 		
 		super.onDestroy();
-		
 	}
 	
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub
 		super.finish();
-		//overridePendingTransition(R.anim.push_left_in, R.anim.push_right_out);
+		overridePendingTransition(R.anim.push_left_in, R.anim.push_right_out);
 	}
-	
+
 	@Override
-	public void onBackPressed() {
-		
-		super.onBackPressed();
+	public void startActivity(Intent intent)
+	{
+		super.startActivity(intent);
+		overridePendingTransition(R.anim.push_right_in,R.anim.push_left_out);
 	}
 }

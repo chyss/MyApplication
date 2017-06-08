@@ -27,7 +27,7 @@ import com.chyss.myapplication.widget.webview.WebView;
 /**
  * 展示各类UI的设置
  */
-public class AcountFragment extends Fragment {
+public class AcountFragment extends BaseFragment {
 
 	private AnimImageView anim_imgview;
 

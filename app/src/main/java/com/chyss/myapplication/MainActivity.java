@@ -10,6 +10,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +29,9 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	private ImageView homeImage,kindImage,zoneImage,acountImage;
 	private TextView homeText,kindText,zoneText,acountText;
 	private Fragment mContent = null;
+
+	//记录回退点击次数
+	private int count;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -173,4 +178,31 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 			}
 		}
 	}
+
+	/**
+	 * 一秒钟点击2次以上回退键才退出app
+	 */
+	@Override
+	public void onBackPressed()
+	{
+		count++;
+		if(count < 2)
+		{
+			handler.sendEmptyMessageDelayed(0,1000);
+		}
+		else
+		{
+			handler.removeMessages(0);
+			super.onBackPressed();
+		}
+	}
+
+	Handler handler = new Handler()
+	{
+		@Override
+		public void handleMessage(Message msg)
+		{
+			count = 0;
+		}
+	};
 }

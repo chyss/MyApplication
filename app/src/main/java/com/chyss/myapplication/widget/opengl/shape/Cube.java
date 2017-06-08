@@ -23,7 +23,7 @@ public class Cube extends Shape
                     "varying vec4 vColor;"+
                     "attribute vec4 aColor;"+
                     "void main(){"+
-                    " gl_Position = vMatrix*vPosition;"+
+                    "gl_Position = vMatrix*vPosition;"+
                     "vColor = aColor;"+
                     "}";
 
@@ -31,7 +31,7 @@ public class Cube extends Shape
             "precision mediump float;"+
                     "varying vec4 vColor;"+
                     "void main(){"+
-                    " gl_FragColor = vColor;"+
+                    "gl_FragColor = vColor;"+
                     "}";
 
     private float[] projectMatrix = new float[16];

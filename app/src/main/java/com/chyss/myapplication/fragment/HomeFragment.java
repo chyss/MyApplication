@@ -22,7 +22,7 @@ import com.chyss.myapplication.fragment.home.ListFragment;
 import com.chyss.myapplication.fragment.home.NewsFragment;
 import com.chyss.myapplication.utils.Logg;
 
-public class HomeFragment extends Fragment
+public class HomeFragment extends BaseFragment
 {
 	public static final String TAG = "HomeFragment";
 	private ImageView scan, acount;

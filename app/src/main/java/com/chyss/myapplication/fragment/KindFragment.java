@@ -30,7 +30,7 @@ import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.view.xlist.XListView;
 import com.chyss.myapplication.widget.recycler.view.PullBaseView;
 
-public class KindFragment extends Fragment
+public class KindFragment extends BaseFragment
 {
 	private RecyclerView recyclerView;
 	private List<KindData> datas = new ArrayList<>();

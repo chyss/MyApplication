@@ -1,6 +1,5 @@
 package com.chyss.myapplication.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,15 +12,17 @@ import com.chyss.myapplication.activity.RetrofitActivity;
 import com.chyss.myapplication.activity.RxActivity;
 import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.utils.Logg;
+import com.chyss.myapplication.widget.bluetooth.BlueSeletorActivity;
+import com.chyss.myapplication.widget.bluetooth.phone.BlueServiceActivity;
 import com.chyss.myapplication.widget.largPicture.compress.BigImageCompressActivity;
 import com.chyss.myapplication.widget.largPicture.compress.LocalImageCompressActivity;
-import com.chyss.myapplication.widget.opengl.OpenglActivity;
+import com.chyss.myapplication.widget.messagePack.MessagePackActivity;
 import com.chyss.myapplication.widget.opengl.OpenglSelectActivity;
 import com.chyss.myapplication.widget.permission.GetPermissionActivity;
 
-public class FriendzoneFragment extends Fragment {
+public class FriendzoneFragment extends BaseFragment {
 
-	private RelativeLayout retrofit,rxjava,opengl;
+	private RelativeLayout retrofit,rxjava,opengl,bluetooth,msgpack;
 	private RelativeLayout bigimage_compress,localimage_compress,permission_get;
 	
 
@@ -51,6 +52,10 @@ public class FriendzoneFragment extends Fragment {
 
 		opengl = (RelativeLayout)root.findViewById(R.id.zone_opengl);
 		opengl.setOnClickListener(onClickListener);
+		bluetooth = (RelativeLayout)root.findViewById(R.id.zone_bluetooth);
+		bluetooth.setOnClickListener(onClickListener);
+		msgpack = (RelativeLayout)root.findViewById(R.id.zone_msgpack);
+		msgpack.setOnClickListener(onClickListener);
 
 		bigimage_compress = (RelativeLayout)root.findViewById(R.id.bigimage_compress);
 		bigimage_compress.setOnClickListener(onClickListener);
@@ -69,12 +74,18 @@ public class FriendzoneFragment extends Fragment {
 			{
 				case R.id.zone_retrofit:
 					stepNext(RetrofitActivity.class);
-				break;
+					break;
 				case R.id.zone_rxjava:
 					stepNext(RxActivity.class);
 					break;
 				case R.id.zone_opengl:
 					stepNext(OpenglSelectActivity.class);
+					break;
+				case R.id.zone_bluetooth:
+					stepNext(BlueSeletorActivity.class);
+					break;
+				case R.id.zone_msgpack:
+					stepNext(MessagePackActivity.class);
 					break;
 				case R.id.bigimage_compress:
 					stepNext(BigImageCompressActivity.class);
@@ -86,8 +97,7 @@ public class FriendzoneFragment extends Fragment {
 					stepNext(GetPermissionActivity.class);
 					break;
 				default:
-
-				break;
+					break;
 			}
 		}
 	};
