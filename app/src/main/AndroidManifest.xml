@@ -152,9 +152,23 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".widget.bluetooth.ble.BleDiscoverActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".widget.bluetooth.ble.BleMainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".widget.bluetooth.ble.BleServiceActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".widget.messagePack.MessagePackActivity"
             android:screenOrientation="portrait">
         </activity>
+
+        <service android:name=".widget.bluetooth.ble.BleService"/>
 
         <receiver android:name=".widget.notice.NotificationReceiver">
             <intent-filter>

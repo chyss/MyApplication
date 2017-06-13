@@ -1,16 +1,18 @@
-package com.chyss.myapplication.widget.bluetooth.phone;
+package com.chyss.myapplication.widget.bluetooth.ble;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothSocket;
+import android.bluetooth.le.BluetoothLeScanner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,8 +25,6 @@ import com.chyss.myapplication.R;
 import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.widget.bluetooth.adapter.BlueAdapter;
-import com.chyss.myapplication.widget.bluetooth.ble.BleDiscoverActivity;
-import com.chyss.myapplication.widget.bluetooth.ble.BleMainActivity;
 
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ import java.util.UUID;
  * @author chyss 2017-05-05
  */
 
-public class BlueConnActivity extends BaseActivity
+public class BleDiscoverActivity extends BaseActivity
 {
     public static final String TAG = "Ble";
     private BluetoothAdapter bluetoothAdapter;
@@ -107,7 +107,7 @@ public class BlueConnActivity extends BaseActivity
         public void onItemClick(View view, final int position)
         {
 
-            Toast.makeText(BlueConnActivity.this, "蓝牙：" + position, Toast.LENGTH_SHORT).show();
+            Toast.makeText(BleDiscoverActivity.this, "蓝牙：" + position, Toast.LENGTH_SHORT).show();
 
             //判断当前是否正在搜索
             if (bluetoothAdapter.isDiscovering())
@@ -118,7 +118,7 @@ public class BlueConnActivity extends BaseActivity
             String address = devices.get(position).getAddress();
             String name = devices.get(position).getName();
 
-            Intent intent = new Intent(BlueConnActivity.this, BlueMainActivity.class);
+            Intent intent = new Intent(BleDiscoverActivity.this, BleMainActivity.class);
             intent.putExtra("address", address);
             intent.putExtra("name", name);
             startActivity(intent);
@@ -182,14 +182,14 @@ public class BlueConnActivity extends BaseActivity
      */
     private void getBluetoothDevices()
     {
-        IntentFilter blueFilter = new IntentFilter();
-        blueFilter.addAction(BluetoothDevice.ACTION_FOUND);
-        blueFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
-        blueFilter.addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
-        blueFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        registerReceiver(receiver, blueFilter);
-        //查找蓝牙设备
-        bluetoothAdapter.startDiscovery();
+                IntentFilter blueFilter = new IntentFilter();
+                blueFilter.addAction(BluetoothDevice.ACTION_FOUND);
+                blueFilter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
+                blueFilter.addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
+                blueFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+                registerReceiver(receiver, blueFilter);
+                //查找蓝牙设备
+                bluetoothAdapter.startDiscovery();
     }
 
     @Override

@@ -6,6 +6,8 @@ import android.view.View;
 
 import com.chyss.myapplication.BaseActivity;
 import com.chyss.myapplication.R;
+import com.chyss.myapplication.widget.bluetooth.ble.BleDiscoverActivity;
+import com.chyss.myapplication.widget.bluetooth.ble.BleServiceActivity;
 import com.chyss.myapplication.widget.bluetooth.phone.BlueConnActivity;
 import com.chyss.myapplication.widget.bluetooth.phone.BlueMainActivity;
 import com.chyss.myapplication.widget.bluetooth.phone.BlueServiceActivity;
@@ -28,9 +30,9 @@ public class BlueSeletorActivity extends BaseActivity
     private void initView()
     {
         findViewById(R.id.bluetooth_conn).setOnClickListener(onClickListener);
-        findViewById(R.id.bluetooth_main).setOnClickListener(onClickListener);
         findViewById(R.id.bluetooth_service).setOnClickListener(onClickListener);
-        findViewById(R.id.bluetooth_blemode).setOnClickListener(onClickListener);
+        findViewById(R.id.bluetooth_blemain).setOnClickListener(onClickListener);
+        findViewById(R.id.bluetooth_bleservice).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener()
@@ -42,14 +44,14 @@ public class BlueSeletorActivity extends BaseActivity
                 case R.id.bluetooth_conn:
                     stepNext(BlueConnActivity.class); //主连接（手机）
                     break;
-                case R.id.bluetooth_main:
-                    stepNext(BlueMainActivity.class); //主（手机）
-                    break;
                 case R.id.bluetooth_service:
                     stepNext(BlueServiceActivity.class); //从（手机）
                     break;
-                case R.id.bluetooth_blemode:
-                    stepNext(BlueToothActivity.class); //蓝牙模块通信
+                case R.id.bluetooth_blemain:
+                    stepNext(BleDiscoverActivity.class); //蓝牙模块通信,主
+                    break;
+                case R.id.bluetooth_bleservice:
+                    stepNext(BleServiceActivity.class); //蓝牙模块通信，从
                     break;
             }
         }
