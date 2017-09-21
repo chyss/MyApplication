@@ -17,7 +17,7 @@ import javax.microedition.khronos.opengles.GL10;
  * @author chyss 2017-05-05
  */
 
-public class Square extends Shape
+public class Square_side extends Shape
 {
     private final String vertexShaderCode =
             "attribute vec4 vPosition;"+
@@ -67,7 +67,7 @@ public class Square extends Shape
     };
     private int resId = R.mipmap.ic_launcher;
 
-    public Square(View view,float[] coords,float[] textureCoord,int resId)
+    public Square_side(View view, float[] coords, float[] textureCoord, int resId)
     {
         this.view = view;
         if(coords != null)

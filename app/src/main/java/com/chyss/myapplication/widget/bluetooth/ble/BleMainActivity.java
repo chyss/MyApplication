@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.BluetoothSocket;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.chyss.myapplication.BaseActivity;
@@ -33,13 +34,19 @@ public class BleMainActivity extends BaseActivity
     BluetoothAdapter bluetoothAdapter;
     //和客户端相同的UUID
     private UUID connUUID = UUID.fromString("abcd1234-ab12-ab12-ab12-abcdef123456");
+
+//    private String serverUUID = "00001801-0000-1000-8000-00805f9b34fb";
+//    private String charecUUID = "00002a05-0000-1000-8000-00805f9b34fb";
+
+    private String serverUUID = "00001801-0000-1000-8000-00805f123456";
+    private String charecUUID = "00002a05-0000-1000-8000-00805f123456";
     private BluetoothDevice device;
-    private BluetoothSocket clientSocket;
-    private OutputStream os;
 
     private String name;
     private String address;
     private BluetoothGatt mBluetoothGatt;
+
+    private EditText input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -53,12 +60,15 @@ public class BleMainActivity extends BaseActivity
         setTitle(name);
 
         findViewById(R.id.ble_send_news).setOnClickListener(onClickListener);
+        findViewById(R.id.ble_recieve_news).setOnClickListener(onClickListener);
+        input = (EditText) findViewById(R.id.ble_input_news);
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         //获得远程设备
         device = bluetoothAdapter.getRemoteDevice(address);
 
         mBluetoothGatt = device.connectGatt(BleMainActivity.this, false, mGattCallback);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener()
@@ -70,11 +80,13 @@ public class BleMainActivity extends BaseActivity
             {
             	case R.id.ble_send_news:
 
-                    //write("hello world".getBytes(),"00001801-0000-1000-8000-00805f9b34fb","00002a05-0000-1000-8000-00805f9b34fb");
-
-                    BluetoothGattCharacteristic bgc = getCharcteristic("00001801-0000-1000-8000-00805f9b34fb","00002a05-0000-1000-8000-00805f9b34fb");
-                    Toast.makeText(BleMainActivity.this,bgc.getStringValue(0),Toast.LENGTH_SHORT).show();
+                    writeCharacteristic(input.getText().toString().getBytes(),serverUUID,charecUUID);
             	break;
+                case R.id.ble_recieve_news:
+
+                    byte[] result = readCharacteristic(serverUUID,charecUUID);
+                    Toast.makeText(BleMainActivity.this,new String(result),Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     };
@@ -118,10 +130,10 @@ public class BleMainActivity extends BaseActivity
                         Logg.e(TAG, "Characteristic : " + gattCharacteristic.getUuid()+"      "+gattCharacteristic.getDescriptors());
                         //gatt.writeCharacteristic(gattCharacteristic);
 
-                        gatt.setCharacteristicNotification(gattCharacteristic, true);  //设置characteristic的通知，触发bluetoothGatt.onCharacteristicWrite()事件。
-                        gattCharacteristic.setValue(new byte[]{0});
-                        gattCharacteristic.setValue("hello world!");
-                        gatt.writeCharacteristic(gattCharacteristic);
+//                        gatt.setCharacteristicNotification(gattCharacteristic, true);  //设置characteristic的通知，触发bluetoothGatt.onCharacteristicWrite()事件。
+//                        gattCharacteristic.setValue(new byte[]{0});
+//                        gattCharacteristic.setValue("hello world!");
+//                        gatt.writeCharacteristic(gattCharacteristic);
 
                         List<BluetoothGattDescriptor> descriptors = gattCharacteristic.getDescriptors();
                         for (BluetoothGattDescriptor descriptor : descriptors)
@@ -171,81 +183,63 @@ public class BleMainActivity extends BaseActivity
         }
     };
 
-    //获取服务
-    public BluetoothGattService getService(UUID uuid) {
-        if (bluetoothAdapter == null || mBluetoothGatt == null) {
-            Logg.e(TAG, "BluetoothAdapter not initialized");
-            return null;
-        }
-        return mBluetoothGatt.getService(uuid);
-    }
-
-    //获取特征
-    private BluetoothGattCharacteristic getCharcteristic(String serviceUUID, String characteristicUUID) {
-
+    /**
+     * 从Characteristic获取数据
+     *
+     * @param serviceUUID
+     * @param charecUUID
+     */
+    public byte[] readCharacteristic(String serviceUUID,String charecUUID) {
         //得到服务对象
-        BluetoothGattService service = getService(UUID.fromString(serviceUUID));  //调用上面获取服务的方法
+        BluetoothGattService service = mBluetoothGatt.getService(UUID.fromString(serviceUUID));  //调用上面获取服务的方法
 
         if (service == null) {
             Logg.e(TAG, "Can not find 'BluetoothGattService'");
             return null;
         }
 
-        //得到此服务结点下Characteristic对象
-        final BluetoothGattCharacteristic gattCharacteristic = service.getCharacteristic(UUID.fromString(characteristicUUID));
-        if (gattCharacteristic != null) {
-            return gattCharacteristic;
-        } else {
+        //得到服务结点下Characteristic
+        BluetoothGattCharacteristic readCharacteristic = service.getCharacteristic(UUID.fromString(charecUUID));
+        if (readCharacteristic == null) {
             Logg.e(TAG, "Can not find 'BluetoothGattCharacteristic'");
             return null;
         }
+        boolean isBoolean = mBluetoothGatt.readCharacteristic(readCharacteristic);
+        Logg.e(TAG, "readCharacteristic = " +isBoolean);
+        return readCharacteristic.getValue();
     }
 
-    //获取数据
-    public void readCharacteristic(BluetoothGattCharacteristic characteristic) {
-        if (bluetoothAdapter == null || mBluetoothGatt == null) {
-            Logg.e(TAG, "BluetoothAdapter not initialized");
+    /**
+     * 写入Characteristic
+     *
+     * @param data              要写入的数据
+     * @param serviceUUID      服务UUID
+     * @param charecUUID       Characteristic UUID
+     */
+    public void writeCharacteristic(byte[] data,String serviceUUID,String charecUUID) {
+
+        //得到服务对象
+        BluetoothGattService service = mBluetoothGatt.getService(UUID.fromString(serviceUUID));  //调用上面获取服务的方法
+
+        if (service == null) {
+            Logg.e(TAG, "Can not find 'BluetoothGattService'");
             return;
         }
-        mBluetoothGatt.readCharacteristic(characteristic);
-    }
 
-    public boolean setCharacteristicNotification(BluetoothGattCharacteristic characteristic, boolean enabled) {
-        if (bluetoothAdapter == null || mBluetoothGatt == null) {
-            Logg.e(TAG, "BluetoothAdapter not initialized");
-            return false;
-        }
-        return mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);
-    }
-
-    public void write(byte[] data,String serviceUUID,String charecUUID) {   //一般都是传byte
-        //得到可写入的characteristic Utils.isAIRPLANE(mContext) &&
-//        if(!mBleManager.isEnabled()){
-//            TLog.e(TAG, "writeCharacteristic 开启飞行模式");
-//            //closeBluetoothGatt();
-//            isGattConnected = false;
-//            broadcastUpdate(Config.ACTION_GATT_DISCONNECTED);
-//            return;
-//        }
-        BluetoothGattCharacteristic writeCharacteristic = getCharcteristic(serviceUUID, charecUUID);  //这个UUID都是根据协议号的UUID
+        //得到服务结点下Characteristic
+        BluetoothGattCharacteristic writeCharacteristic = service.getCharacteristic(UUID.fromString(charecUUID));
         if (writeCharacteristic == null) {
-            Logg.e(TAG, "Write failed. GattCharacteristic is null.");
+            Logg.e(TAG, "Can not find 'BluetoothGattCharacteristic'");
             return;
         }
-        writeCharacteristic.setValue(data); //为characteristic赋值
-        writeCharacteristicWrite(writeCharacteristic);
+        //设置characteristic的通知，触发bluetoothGatt.onCharacteristicWrite()事件。
+        mBluetoothGatt.setCharacteristicNotification(writeCharacteristic, true);
+        //为characteristic赋值
+        writeCharacteristic.setValue(data);
+        //如果isBoolean返回的是true则写入成功
+        boolean isBoolean = mBluetoothGatt.writeCharacteristic(writeCharacteristic);
 
-    }
-
-    public void writeCharacteristicWrite(BluetoothGattCharacteristic characteristic) {
-        if (bluetoothAdapter == null || mBluetoothGatt == null) {
-            Logg.e(TAG, "BluetoothAdapter not initialized");
-            return;
-        }
-        Logg.e(TAG, "BluetoothAdapter 写入数据");
-        boolean isBoolean = false;
-        isBoolean = mBluetoothGatt.writeCharacteristic(characteristic);
-        Logg.e(TAG, "BluetoothAdapter_writeCharacteristic = " +isBoolean);  //如果isBoolean返回的是true则写入成功
+        Logg.e(TAG, "writeCharacteristic = " +isBoolean);
     }
 
     @Override

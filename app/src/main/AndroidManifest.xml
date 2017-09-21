@@ -76,19 +76,11 @@
             android:windowSoftInputMode="stateVisible">
         </activity>
         <activity
-            android:name=".activity.RetrofitActivity"
+            android:name=".widget.retrofit.RetrofitActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".activity.RxActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".activity.RecyclerActivity01"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".activity.RecyclerActivity02"
+            android:name=".widget.rxjava.RxActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

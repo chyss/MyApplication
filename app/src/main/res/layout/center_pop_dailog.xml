@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:fillViewport="true"
         android:fadingEdge="none"
+        android:overScrollMode="never"
         app:maxHeight="119dp"
         android:scrollbars="none">
 

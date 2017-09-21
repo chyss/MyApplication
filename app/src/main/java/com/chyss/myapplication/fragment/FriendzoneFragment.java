@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.activity.RetrofitActivity;
-import com.chyss.myapplication.activity.RxActivity;
+import com.chyss.myapplication.widget.retrofit.RetrofitActivity;
+import com.chyss.myapplication.widget.rxjava.RxActivity;
 import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.widget.bluetooth.BlueSeletorActivity;
-import com.chyss.myapplication.widget.bluetooth.phone.BlueServiceActivity;
 import com.chyss.myapplication.widget.largPicture.compress.BigImageCompressActivity;
 import com.chyss.myapplication.widget.largPicture.compress.LocalImageCompressActivity;
 import com.chyss.myapplication.widget.messagePack.MessagePackActivity;

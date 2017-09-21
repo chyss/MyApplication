@@ -7,22 +7,41 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * 注意密码的长度使不同的，DES是8个字节的长度的密码，DESede是24个字节的长度的密码，
+ * AES 是 16个字节的密码加密全部需要通过byte[]作为数据和密钥进行处理，所以需要获取字节数组。
+ *
+ * create by chyss 2017-6-15
+ */
 public class AESUtil
 {
-
-	public static String encrypt(String seed, String cleartext)
+	/**
+	 * AES 加密
+	 * @param seed   	加密秘钥，16个字节的密码
+	 * @param str		要加密的数据
+	 * @return			密文
+	 * @throws Exception
+	 */
+	public static String encrypt(String seed, String str)
 			throws Exception
 	{
 		byte[] rawKey = getRawKey(seed.getBytes());
-		byte[] result = encrypt(rawKey, cleartext.getBytes());
+		byte[] result = encrypt(rawKey, str.getBytes());
 		return toHex(result);
 	}
 
-	public static String decrypt(String seed, String encrypted)
+	/**
+	 * AES 加密
+	 * @param seed   	解密秘钥，16个字节的密码
+	 * @param str		要解密的数据
+	 * @return			明文
+	 * @throws Exception
+	 */
+	public static String decrypt(String seed, String str)
 			throws Exception
 	{
 		byte[] rawKey = getRawKey(seed.getBytes());
-		byte[] enc = toByte(encrypted);
+		byte[] enc = toByte(str);
 		byte[] result = decrypt(rawKey, enc);
 		return new String(result);
 	}
@@ -58,17 +77,17 @@ public class AESUtil
 		return decrypted;
 	}
 
-	public static String toHex(String txt)
+	private static String toHex(String txt)
 	{
 		return toHex(txt.getBytes());
 	}
 
-	public static String fromHex(String hex)
+	private static String fromHex(String hex)
 	{
 		return new String(toByte(hex));
 	}
 
-	public static byte[] toByte(String hexString)
+	private static byte[] toByte(String hexString)
 	{
 		int len = hexString.length() / 2;
 		byte[] result = new byte[len];
@@ -78,7 +97,7 @@ public class AESUtil
 		return result;
 	}
 
-	public static String toHex(byte[] buf)
+	private static String toHex(byte[] buf)
 	{
 		if (buf == null)
 			return "";
@@ -96,5 +115,4 @@ public class AESUtil
 	{
 		sb.append(HEX.charAt((b >> 4) & 0x0f)).append(HEX.charAt(b & 0x0f));
 	}
-
 }

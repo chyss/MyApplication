@@ -5,7 +5,8 @@ public class ListData
 	
 	private int type;
 	private String name;
-	private String imgUrl;
+	private String imgUrl1;
+	private String imgUrl2;
 
 	public int getType()
 	{
@@ -27,13 +28,23 @@ public class ListData
 		this.name = name;
 	}
 
-	public String getImgUrl()
+	public String getImgUrl1()
 	{
-		return imgUrl;
+		return imgUrl1;
 	}
 
-	public void setImgUrl(String imgUrl)
+	public void setImgUrl1(String imgUrl1)
 	{
-		this.imgUrl = imgUrl;
+		this.imgUrl1 = imgUrl1;
+	}
+
+	public String getImgUrl2()
+	{
+		return imgUrl2;
+	}
+
+	public void setImgUrl2(String imgUrl2)
+	{
+		this.imgUrl2 = imgUrl2;
 	}
 }

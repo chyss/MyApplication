@@ -1,4 +1,4 @@
-package com.chyss.myapplication.activity;
+package com.chyss.myapplication.widget.rxjava;
 
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,7 +10,7 @@ import com.chyss.myapplication.data.ResultDesc;
 import com.chyss.myapplication.data.response.Version;
 import com.chyss.myapplication.utils.Logg;
 import com.chyss.myapplication.utils.analysis.DataImpl;
-import com.chyss.myapplication.utils.net.NetUtils;
+import com.chyss.myapplication.widget.retrofit.util.RetrofitUtils;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -59,7 +59,7 @@ public class RxActivity extends BaseActivity
         map.put("version", Net.VERSIONCODE);
         map.put("platform", Net.PLATFORM);
 
-        NetUtils.postRequestFlowable(Net.version,map)
+        RetrofitUtils.postRequestFlowable(Net.version,map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())   //处理数据线程的切换
                 .map(new Function<String, ResultDesc<Version>>()
@@ -118,7 +118,7 @@ public class RxActivity extends BaseActivity
         map.put("version", Net.VERSIONCODE);
         map.put("platform", Net.PLATFORM);
 
-        NetUtils.postRequestObservable(Net.version,map)
+        RetrofitUtils.postRequestObservable(Net.version,map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .map(new Function<String, ResultDesc<Version>>()

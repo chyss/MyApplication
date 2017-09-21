@@ -67,7 +67,7 @@ public class Cylinder extends Shape
     //缩放
     float[] scaleMatrix = new float[16];
 
-    Circle cBottom,cTop;
+    Circle_side cBottom,cTop;
 
     public float yAngle;//绕Y轴旋转的角度
     public float xAngle; //绕X轴旋转的角度
@@ -111,11 +111,11 @@ public class Cylinder extends Shape
         // 创建可执行的 OpenGL ES program
         GLES20.glLinkProgram(program);
 
-        cBottom = new Circle();
+        cBottom = new Circle_side();
         cBottom.setHeight(0.0f);
         cBottom.onSurfaceCreated(gl,config);
 
-        cTop = new Circle();
+        cTop = new Circle_side();
         cTop.setHeight(height);
         cTop.onSurfaceCreated(gl,config);
     }

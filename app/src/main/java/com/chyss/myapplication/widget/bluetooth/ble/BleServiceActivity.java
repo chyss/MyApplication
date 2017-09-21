@@ -2,8 +2,14 @@ package com.chyss.myapplication.widget.bluetooth.ble;
 
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattServer;
+import android.bluetooth.BluetoothGattServerCallback;
+import android.bluetooth.BluetoothManager;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,6 +24,7 @@ import com.chyss.myapplication.utils.Logg;
 
 import java.io.InputStream;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 /**
  * @author chyss 2017-05-05
@@ -26,14 +33,10 @@ import java.util.UUID;
 public class BleServiceActivity extends BaseActivity
 {
     BluetoothAdapter bluetoothAdapter;
-    //和客户端相同的UUID
-    private UUID connUUID = UUID.fromString("abcd1234-ab12-ab12-ab12-abcdef123456");
-    private final String NAME = "Bluetooth_Socket";
-    private BluetoothServerSocket serverSocket;
-    private BluetoothSocket socket;
-    private InputStream is;//输入流
-    private Message msg;
-    private int DEFIND_BLUETOOTH = 10001;
+    BluetoothGattServer bluetoothGattServer;
+
+    private String serverUUID = "00001801-0000-1000-8000-00805f123456";
+    private String charecUUID = "00002a05-0000-1000-8000-00805f123456";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -81,81 +84,27 @@ public class BleServiceActivity extends BaseActivity
         {
             //打开蓝牙
             bluetoothAdapter.enable();
-
         }
-        //蓝牙设置蓝牙可见
-        Intent blueIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
-        //设置蓝牙可见时间
-        blueIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
-        startActivityForResult(blueIntent, DEFIND_BLUETOOTH);
+
+        connect();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    private void connect()
     {
-        Toast.makeText(this, "蓝牙打开成功："+requestCode+"--------" + resultCode, Toast.LENGTH_SHORT).show();
-        //回调蓝牙打开情况
-        if (requestCode == DEFIND_BLUETOOTH)
-        {
-            getData();
-        }
-        else
-        {
+        BluetoothManager bm = (BluetoothManager) this.getSystemService(Context.BLUETOOTH_SERVICE);
+        bluetoothGattServer = bm.openGattServer(this,serverCallback);
 
-        }
+        BluetoothGattCharacteristic character = new BluetoothGattCharacteristic(UUID.fromString(charecUUID),BluetoothGattCharacteristic.PROPERTY_NOTIFY,BluetoothGattCharacteristic.PERMISSION_READ);
+        //BluetoothGattServer service = new BluetoothGattServer(UUID.fromString(serverUUID),BluetoothGattServer.GATT_SERVER,1);
     }
 
-    private void getData()
+    BluetoothGattServerCallback serverCallback = new BluetoothGattServerCallback()
     {
-        new Thread(new Runnable()
+        @Override
+        public void onConnectionStateChange(BluetoothDevice device, int status, int newState)
         {
-            @Override
-            public void run()
-            {
-                try {
-                    serverSocket = bluetoothAdapter.listenUsingRfcommWithServiceRecord(NAME, connUUID);
-                    socket = serverSocket.accept();
-                    is = socket.getInputStream();
-                    while(true) {
-                        byte[] buffer =new byte[1024];
-                        int count = is.read(buffer);
-                        msg = new Message();
-                        msg.obj = new String(buffer, 0, count, "utf-8");
-                        runOnUiThread(new Runnable()
-                        {
-                            @Override
-                            public void run()
-                            {
-                                Toast.makeText(BleServiceActivity.this,String.valueOf(msg.obj),Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-                catch (Exception e) {
-                    Logg.e("bluetooth","bluetooth error : "+e);
-                }
-            }
-        }).start();
-    }
-
-    @Override
-    protected void onDestroy()
-    {
-        try
-        {
-            if(is != null)
-            {
-                is.close();
-            }
-            if(socket != null)
-            {
-                socket.close();
-            }
+            Logg.e("ble","onConnectionStateChange newState : "+newState);
+            super.onConnectionStateChange(device, status, newState);
         }
-        catch (Exception e)
-        {
-        	Logg.e(Net.TAG, "catch error : " + e);
-        }
-        super.onDestroy();
-    }
+    };
 }

@@ -1,16 +1,14 @@
-package com.chyss.myapplication.utils.net;
+package com.chyss.myapplication.widget.retrofit.util;
 
 import com.chyss.myapplication.data.Net;
-import com.chyss.myapplication.interf.RequestServ;
+import com.chyss.myapplication.widget.retrofit.inter.RequestServ;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-import java.io.File;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -25,7 +23,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  * Created by chyss on 2017/4/6
  */
 
-public class NetUtils
+public class RetrofitUtils
 {
     private static Retrofit retrofit;
 
@@ -95,7 +93,7 @@ public class NetUtils
     }
 
     /**
-     * Retrofit 的post请求
+     * Retrofit 的post请求,表单的形式提交数据
      * @param callback
      * @param map
      * @param url
@@ -104,6 +102,18 @@ public class NetUtils
     {
         RequestServ rs = request();
         Call<String> call =  rs.post(url,map);
+        call.enqueue(callback);
+    }
+
+    /**
+     * Retrofit 的post请求,表单的形式提交数据
+     * @param callback
+     * @param body
+     */
+    public static void postRequest(Callback<String> callback, RequestBody body,String url)
+    {
+        RequestServ rs = request();
+        Call<String> call =  rs.post(url,body);
         call.enqueue(callback);
     }
 

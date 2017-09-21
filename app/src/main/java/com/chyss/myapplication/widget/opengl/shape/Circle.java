@@ -127,7 +127,7 @@ public class Circle extends Shape
     public void onDrawFrame(GL10 gl)
     {
         //清除深度缓冲与颜色缓冲
-        //GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT|GLES20.GL_DEPTH_BUFFER_BIT);
 
         // 添加program到OpenGL ES环境中
         GLES20.glUseProgram(program);

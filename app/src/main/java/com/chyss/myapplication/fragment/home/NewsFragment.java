@@ -51,13 +51,9 @@ public class NewsFragment extends Fragment
 
 	private void initData()
 	{
-		addViewToList("http://www.pptbz.com/pptpic/UploadFiles_6909/201204/2012041411433867.jpg");
-		addViewToList("http://www.pptbz.com/pptpic/UploadFiles_6909/201110/20111014111307895.jpg");
-		addViewToList("http://e.hiphotos.baidu.com/image/pic/flingswipe_item/4e4a20a4462309f7ec4a24d2760e0cf3d6cad6cd.jpg");
-		addViewToList("http://att2.citysbs.com/fz/bbs_attachments/2010/month_1002/middle_1002031225cd908311aa3f2124.jpg");
-		addViewToList("http://img1.imgtn.bdimg.com/it/u=2096330929,4247912824&fm=21&gp=0.jpg");
-		addViewToList("http://g.hiphotos.baidu.com/image/h%3D200/sign=4d3fabc3cbfc1e17e2bf8b317a91f67c/6c224f4a20a446230761b9b79c22720e0df3d7bf.jpg");
-
+		addViewToList("http://img5.imgtn.bdimg.com/it/u=2916880539,291677888&fm=27&gp=0.jpg");
+		addViewToList("http://img5.imgtn.bdimg.com/it/u=3808425403,2510620310&fm=27&gp=0.jpg");
+		addViewToList("http://img5.imgtn.bdimg.com/it/u=3352575184,460439047&fm=27&gp=0.jpg");
 		intiPagerData();
 	}
 

@@ -6,6 +6,7 @@ import com.chyss.myapplication.fragment.FriendzoneFragment;
 import com.chyss.myapplication.fragment.HomeFragment;
 import com.chyss.myapplication.fragment.KindFragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
@@ -18,9 +19,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends BaseActivity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener {
 
 	public static final String TAG = "MainActivity";
 	private RelativeLayout home_frag, king_frag, zone_frag, acount_frag;
@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		missTitleView();
 		initView();
 	}
 

@@ -76,7 +76,7 @@ public class CubeSquareTexture extends Shape
 
     private int[] resIds = {R.mipmap.ic_launcher,R.mipmap.timg,R.mipmap.ic_launcher,R.mipmap.timg,R.mipmap.ic_launcher,R.mipmap.timg};
 
-    private Square[] square;
+    private Square_side[] square;
 
     public CubeSquareTexture(View view)
     {
@@ -93,10 +93,10 @@ public class CubeSquareTexture extends Shape
         GLES20.glEnable(GLES20.GL_CULL_FACE);
         GLES20.glCullFace(GLES20.GL_BACK);
 
-        square = new Square[coords.length];
+        square = new Square_side[coords.length];
         for (int i = 0; i < coords.length; i++)
         {
-            square[i] = new Square(view,coords[i],textureCoord[i],resIds[i]);
+            square[i] = new Square_side(view,coords[i],textureCoord[i],resIds[i]);
             square[i].onSurfaceCreated(gl,config);
         }
     }

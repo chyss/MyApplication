@@ -1,4 +1,4 @@
-package com.chyss.myapplication.interf;
+package com.chyss.myapplication.widget.retrofit.inter;
 
 import java.util.Map;
 
@@ -6,10 +6,12 @@ import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HeaderMap;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -27,6 +29,11 @@ public interface RequestServ
     @FormUrlEncoded
     @POST
     Call<String> post(@Url String url,@FieldMap Map<String,String> map);
+
+    //post json传递
+    @Headers({"Content-type:application/json;charset=UTF-8"})
+    @POST
+    Call<String> post(@Url String url,@Body RequestBody body);
 
     @GET
     Call<String> get(@Url String url,@QueryMap Map<String,String> map);
@@ -51,7 +58,6 @@ public interface RequestServ
 
     @GET
     Observable<String> getObservable(@Url String url, @QueryMap Map<String,String> map);
-
 
     /**
      * 用于图片的上传服务器

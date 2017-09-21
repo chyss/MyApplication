@@ -3,32 +3,17 @@ package com.chyss.myapplication.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.activity.RecyclerActivity01;
 import com.chyss.myapplication.adapter.KindListAdapter;
-import com.chyss.myapplication.adapter.RecyAdapter01;
-import com.chyss.myapplication.adapter.RecyAdapter02;
-import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.data.response.KindData;
-import com.chyss.myapplication.data.response.RecyData;
-import com.chyss.myapplication.data.response.RecyData02;
-import com.chyss.myapplication.utils.Logg;
-import com.chyss.myapplication.view.xlist.XListView;
-import com.chyss.myapplication.widget.recycler.view.PullBaseView;
 
 public class KindFragment extends BaseFragment
 {

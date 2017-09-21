@@ -19,11 +19,13 @@ import com.chyss.myapplication.data.response.ListData;
 import com.chyss.myapplication.fragment.home.adapter.DifItemListAdapter;
 import com.chyss.myapplication.view.ExpandListView;
 
-public class ListFragment extends Fragment
+public class ListFragment extends Fragment implements DifItemListAdapter.OnListItemClick
 {
 	public static final String TAG = "ListFragment";
 	private ExpandListView listView;
 	private List<ListData> listData = new ArrayList<>();
+	private String big = "http://img1.imgtn.bdimg.com/it/u=1057601304,2646654295&fm=27&gp=0.jpg";
+	private String small = "http://img5.imgtn.bdimg.com/it/u=194685546,499818437&fm=27&gp=0.jpg";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,36 +36,35 @@ public class ListFragment extends Fragment
 		init(root);
 		initData();
 
-		//handler.sendEmptyMessageDelayed(0, 500);
 		return root;
 	}
 
 	private void initData()
 	{
-		addDataToList(1,"normal","http://img0.imgtn.bdimg.com/it/u=3246030480,1173771526&fm=206&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(1,"normal","http://img0.imgtn.bdimg.com/it/u=3246030480,1173771526&fm=206&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
-		addDataToList(0,"special","http://img3.imgtn.bdimg.com/it/u=1100963527,1982157674&fm=21&gp=0.jpg");
+		addDataToList(1,"normal",big,small);
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(1,"normal",big,small);
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
+		addDataToList(0,"special",small,"");
 		
-		listView.setAdapter(new DifItemListAdapter(getActivity(), listData));
+		listView.setAdapter(new DifItemListAdapter(getActivity(), listData,this));
 		listView.setFocusable(false);
-		listView.setOnItemClickListener(onItemClickListener);
 	}
 
-	private void addDataToList(int type,String name,String imgUrl)
+	private void addDataToList(int type,String name,String imgUrl1,String imgUrl2)
 	{
 		ListData data = new ListData();
 		data.setType(type);
 		data.setName(name);
-		data.setImgUrl(imgUrl);
+		data.setImgUrl1(imgUrl1);
+		data.setImgUrl2(imgUrl2);
 		listData.add(data);
 	}
 
@@ -71,30 +72,22 @@ public class ListFragment extends Fragment
 	{
 		listView = (ExpandListView) root.findViewById(R.id.list_listview);
 	}
-	
-	OnItemClickListener onItemClickListener = new OnItemClickListener()
-	{
 
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id)
-		{
-			if (listData.get(position).getType() == 0) {
-				
-				Toast.makeText(getActivity(), "special", Toast.LENGTH_SHORT).show();
-			}
-			else
-			{
-				Toast.makeText(getActivity(), "normal", Toast.LENGTH_SHORT).show();
-			}
-		}
-	};
-	
-	Handler handler = new Handler()
+	@Override
+	public void imglayClick(final int position)
 	{
-		public void handleMessage(android.os.Message msg) {
-			
-			initData();
-		}
-	};
+		Toast.makeText(getActivity(),"imglay "+position,Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void imglay2Click(final int position)
+	{
+		Toast.makeText(getActivity(),"imglay2 "+position,Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void specialClick(final int position)
+	{
+		Toast.makeText(getActivity(),"special "+position,Toast.LENGTH_SHORT).show();
+	}
 }

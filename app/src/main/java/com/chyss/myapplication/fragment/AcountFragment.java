@@ -1,6 +1,5 @@
 package com.chyss.myapplication.fragment;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +10,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.chyss.myapplication.R;
-import com.chyss.myapplication.activity.RecyclerActivity01;
-import com.chyss.myapplication.activity.RecyclerActivity02;
 import com.chyss.myapplication.view.AnimImageView;
 import com.chyss.myapplication.widget.dialog.BottomPopDialog;
 import com.chyss.myapplication.widget.dialog.CenterPopDialog;
@@ -72,12 +69,6 @@ public class AcountFragment extends BaseFragment {
 		RelativeLayout large_img = (RelativeLayout) root.findViewById(R.id.large_img);
 		large_img.setOnClickListener(onClickListener);
 
-		RelativeLayout to_recyclerview = (RelativeLayout) root.findViewById(R.id.to_recyclerview);
-		to_recyclerview.setOnClickListener(onClickListener);
-
-		RelativeLayout to_recyclerview02 = (RelativeLayout) root.findViewById(R.id.to_recyclerview02);
-		to_recyclerview02.setOnClickListener(onClickListener);
-
 		RelativeLayout to_activity1 = (RelativeLayout) root.findViewById(R.id.recycler_refresh1);
 		to_activity1.setOnClickListener(onClickListener);
 
@@ -125,12 +116,6 @@ public class AcountFragment extends BaseFragment {
 					break;
 				case R.id.large_img:
 					stepNext(LargeImageViewActivity.class);
-					break;
-				case R.id.to_recyclerview:
-					stepNext(RecyclerActivity01.class);
-					break;
-				case R.id.to_recyclerview02:
-					stepNext(RecyclerActivity02.class);
 					break;
 				case R.id.recycler_refresh1:
 					stepNext(Activity1.class);

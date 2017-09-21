@@ -4,20 +4,44 @@
                 android:layout_height="match_parent"
                 android:padding="20dp"
     >
-    <TextView
-        android:text="this activity is use to show the base use of Retrofit"
+
+    <Button
+        android:text="FORM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
-        android:id="@+id/retrofit_notes"/>
+        android:background="@drawable/btn_bg_selector"
+        android:id="@+id/retrofit_form"/>
+
+    <Button
+        android:text="JSON"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/retrofit_form"
+        android:layout_toRightOf="@+id/retrofit_form"
+        android:layout_marginLeft="50dp"
+        android:background="@drawable/btn_bg_selector"
+        android:id="@+id/retrofit_json"/>
 
     <TextView
         android:text="/???"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/retrofit_notes"
+        android:layout_below="@+id/retrofit_form"
+        android:layout_marginTop="30dp"
         android:id="@+id/retrofit_response_notes"/>
+
+    <TextView
+        android:text="Retrofit 的请求，请求的数据现提供表单和json两种。返回的数据为json"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/retrofit_response_notes"
+        android:layout_marginTop="20dp"
+        android:id="@+id/retrofit_notes"/>
 
 </RelativeLayout>
