@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+    <TextView
+        android:text="从手机中导出traces.txt文件到电脑D盘："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/rxjava_notes"/>
+
+    <TextView
+        android:text="adb pull /data/anr/traces.txt   d:/"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rxjava_notes"
+        android:layout_marginTop="10dp"
+        android:id="@+id/rxjava_response_notes"/>
+</RelativeLayout>

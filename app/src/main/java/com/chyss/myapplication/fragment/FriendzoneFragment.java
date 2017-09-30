@@ -18,10 +18,11 @@ import com.chyss.myapplication.widget.largPicture.compress.LocalImageCompressAct
 import com.chyss.myapplication.widget.messagePack.MessagePackActivity;
 import com.chyss.myapplication.widget.opengl.OpenglSelectActivity;
 import com.chyss.myapplication.widget.permission.GetPermissionActivity;
+import com.chyss.myapplication.widget.traces.TracesActivity;
 
 public class FriendzoneFragment extends BaseFragment {
 
-	private RelativeLayout retrofit,rxjava,opengl,bluetooth,msgpack;
+	private RelativeLayout retrofit,rxjava,traces,opengl,bluetooth,msgpack;
 	private RelativeLayout bigimage_compress,localimage_compress,permission_get;
 	
 
@@ -48,6 +49,8 @@ public class FriendzoneFragment extends BaseFragment {
 		retrofit.setOnClickListener(onClickListener);
 		rxjava = (RelativeLayout)root.findViewById(R.id.zone_rxjava);
 		rxjava.setOnClickListener(onClickListener);
+		traces = (RelativeLayout)root.findViewById(R.id.zone_traces);
+		traces.setOnClickListener(onClickListener);
 
 		opengl = (RelativeLayout)root.findViewById(R.id.zone_opengl);
 		opengl.setOnClickListener(onClickListener);
@@ -76,6 +79,9 @@ public class FriendzoneFragment extends BaseFragment {
 					break;
 				case R.id.zone_rxjava:
 					stepNext(RxActivity.class);
+					break;
+				case R.id.zone_traces:
+					stepNext(TracesActivity.class);
 					break;
 				case R.id.zone_opengl:
 					stepNext(OpenglSelectActivity.class);
