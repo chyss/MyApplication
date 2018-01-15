@@ -35,13 +35,19 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+    <!--设置权限，其他的应用访问服务的需要配置的权限-->
+    <permission android:name="com.chyss.myapplication.permission.ACCESS_LOCALSERVICE"/>
+
+    <!--ArcGis 地图开发-->
+    <!--<uses-permission android:name="android.permission.INTERNET" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+    <!--<uses-feature android:glEsVersion="0x00020000" android:required="true" />-->
+
     <!-- opengl es 使用OpenGLES 2.0 API -->
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
-
-    <!--设置权限，其他的应用访问服务的需要配置的权限-->
-    <permission android:name="com.chyss.myapplication.permission.ACCESS_LOCALSERVICE"/>
 
     <application
         android:name=".MyApplication"
@@ -187,6 +193,10 @@
         </activity>
         <activity
             android:name=".widget.aidl.messenger.MessengerActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".widget.gis.GisActivity"
             android:screenOrientation="portrait">
         </activity>
 

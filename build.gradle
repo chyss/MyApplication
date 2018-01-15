@@ -17,6 +17,11 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+
+        // ArcGis 地图开发
+        maven {
+            url 'https://esri.bintray.com/arcgis'
+        }
     }
 }
 

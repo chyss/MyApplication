@@ -15,6 +15,7 @@ import com.chyss.myapplication.widget.aidl.messenger.MessengerActivity;
 import com.chyss.myapplication.utils.DoAction;
 import com.chyss.myapplication.widget.aidl.aidl.ClientAidlActivity;
 import com.chyss.myapplication.widget.aidl.process.LocalService;
+import com.chyss.myapplication.widget.gis.GisActivity;
 import com.chyss.myapplication.widget.linearsv.LinearSVActivity;
 import com.chyss.myapplication.widget.retrofit.RetrofitActivity;
 import com.chyss.myapplication.widget.rxjava.RxActivity;
@@ -34,18 +35,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FriendzoneFragment extends BaseFragment {
+public class ToolsFragment extends BaseFragment {
 
 	private RelativeLayout retrofit,rxjava,traces,opengl,bluetooth,msgpack;
 	private RelativeLayout bigimage_compress,localimage_compress,permission_get,scroll_show,linear_sview,screen_shot;
 	private RelativeLayout aidl_client,aidl_service;
 	private RelativeLayout kill_process,kill_app;
 	private RelativeLayout bind_local,kill_remote,kill_local;
+	private RelativeLayout zone_gis;
 	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 	}
 
@@ -94,6 +95,9 @@ public class FriendzoneFragment extends BaseFragment {
 		aidl_service = (RelativeLayout)root.findViewById(R.id.aidl_service);
 		aidl_client.setOnClickListener(onClickListener);
 		aidl_service.setOnClickListener(onClickListener);
+
+		zone_gis = (RelativeLayout)root.findViewById(R.id.zone_gis);
+		zone_gis.setOnClickListener(onClickListener);
 
 		kill_app = (RelativeLayout)root.findViewById(R.id.kill_app);
 		kill_process = (RelativeLayout)root.findViewById(R.id.kill_process);
@@ -191,6 +195,9 @@ public class FriendzoneFragment extends BaseFragment {
 					Map<String,Integer> map3 = getProcessList();
 					Process.killProcess(map3.get("com.chyss.myapplication:local"));
 
+					break;
+				case R.id.zone_gis:
+					DoAction.startActivity(getActivity(),GisActivity  .class);
 					break;
 				default:
 					break;

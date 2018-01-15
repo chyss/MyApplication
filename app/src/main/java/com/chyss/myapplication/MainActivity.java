@@ -2,15 +2,13 @@ package com.chyss.myapplication;
 
 import com.chyss.myapplication.data.Net;
 import com.chyss.myapplication.fragment.AcountFragment;
-import com.chyss.myapplication.fragment.FriendzoneFragment;
+import com.chyss.myapplication.fragment.ToolsFragment;
 import com.chyss.myapplication.fragment.HomeFragment;
 import com.chyss.myapplication.fragment.KindFragment;
-import com.chyss.myapplication.utils.Logg;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,7 +24,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	public static final String TAG = "MainActivity";
 	private RelativeLayout home_frag, king_frag, zone_frag, acount_frag;
-	private Fragment homeFragment, kindFragment, zoneFragment, acountFragment;
+	private Fragment homeFragment, kindFragment, toolsFragment, acountFragment;
 	private FragmentTransaction fragmentTransaction;
 	private ImageView homeImage,kindImage,zoneImage,acountImage;
 	private TextView homeText,kindText,zoneText,acountText;
@@ -113,14 +111,14 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.main_zone:
 
-			zoneFragment = getFragmentManager().findFragmentByTag("zone");
-			Log.e(Net.TAG, "zone CLICK !!"+zoneFragment);
-			if (zoneFragment == null) {
+			toolsFragment = getFragmentManager().findFragmentByTag("zone");
+			Log.e(Net.TAG, "zone CLICK !!"+ toolsFragment);
+			if (toolsFragment == null) {
 
-				zoneFragment = new FriendzoneFragment();
+				toolsFragment = new ToolsFragment();
 			}
-			setFragment(zoneFragment,"zone");
-//			switchContent(mContent,zoneFragment,"zone");
+			setFragment(toolsFragment,"zone");
+//			switchContent(mContent,toolsFragment,"zone");
 			setallDark();
 			zoneImage.setImageResource(R.mipmap.ico_more2);
 			zoneText.setTextColor(Color.RED);

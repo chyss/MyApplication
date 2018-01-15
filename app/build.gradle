@@ -21,6 +21,10 @@ android {
 }
 
 dependencies {
+
+    // ArcGis 地图开发
+    compile 'com.esri.arcgisruntime:arcgis-android:100.1.0'
+
     //andfix 热修复
     compile 'com.alipay.euler:andfix:0.5.0@aar'
 
