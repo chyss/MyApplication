@@ -76,18 +76,18 @@ public class BitmapUtils {
      * @return
      */
     private static String saveMyBitmap(String filename, Bitmap bit) {
-        String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath()+"/laopai/";
-        String filePath = baseDir + filename;
+        String baseDir = Environment.getExternalStorageDirectory().getAbsolutePath()+"/chyss/";
+
         File dir = new File(baseDir);
         if (!dir.exists()) {
             dir.mkdir();
         }
 
+        String filePath = baseDir + filename;
         File f = new File(filePath);
         try {
             f.createNewFile();
-            FileOutputStream fOut = null;
-            fOut = new FileOutputStream(f);
+            FileOutputStream fOut = new FileOutputStream(f);
             bit.compress(Bitmap.CompressFormat.PNG, 100, fOut);
             fOut.flush();
             fOut.close();
@@ -109,12 +109,11 @@ public class BitmapUtils {
         return saveMyBitmap(filename, image);
     }
 
-
     /**
      * 清除缓存文件
      */
     public static void deleteCacheFile(){
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/laopai/");
+        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/chyss/");
         RecursionDeleteFile(file);
     }
     /**

@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import com.chyss.myapplication.activity.NoticeActivity;
 import com.chyss.myapplication.utils.CommUtils;
+import com.chyss.myapplication.utils.DoAction;
 import com.chyss.myapplication.widget.webview.WebView;
 
 /**
@@ -49,7 +50,7 @@ public class NotificationReceiver extends BroadcastReceiver
         {
             if("notice".equals(activity))
             {
-                stepNext(context, NoticeActivity.class);
+                DoAction.startActivityNewTask(context, NoticeActivity.class);
             }
         }
         else if("to_web".equals(afterOpen))
@@ -64,12 +65,5 @@ public class NotificationReceiver extends BroadcastReceiver
         {
 
         }
-    }
-
-    private <T> void stepNext(Context context, Class<T> t)
-    {
-        Intent intent = new Intent(context,t);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  //必须是FLAG_ACTIVITY_NEW_TASK模式
-        context.startActivity(intent);
     }
 }

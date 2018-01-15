@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.chyss.myapplication.R;
+import com.chyss.myapplication.utils.DoAction;
 import com.chyss.myapplication.view.AnimImageView;
 import com.chyss.myapplication.widget.dialog.BottomPopDialog;
 import com.chyss.myapplication.widget.dialog.CenterPopDialog;
@@ -105,7 +106,7 @@ public class AcountFragment extends BaseFragment {
 					WebView.load(getActivity(),"file:///android_asset/index.html","网页");
 					break;
 				case R.id.scroll_list:
-					stepNext(ScrollListViewActivity.class);
+					DoAction.startActivity(getActivity(),ScrollListViewActivity.class);
 					break;
 				case R.id.set_animview:
 					//获取手机分配给app的最大内存
@@ -115,16 +116,16 @@ public class AcountFragment extends BaseFragment {
 					anim_imgview.setImageResource(R.mipmap.logo);
 					break;
 				case R.id.large_img:
-					stepNext(LargeImageViewActivity.class);
+					DoAction.startActivity(getActivity(),LargeImageViewActivity.class);
 					break;
 				case R.id.recycler_refresh1:
-					stepNext(Activity1.class);
+					DoAction.startActivity(getActivity(),Activity1.class);
 					break;
 				case R.id.recycler_refresh2:
-					stepNext(Activity2.class);
+					DoAction.startActivity(getActivity(),Activity2.class);
 					break;
 				case R.id.swip_view:
-					stepNext(SwipeActivity.class);
+					DoAction.startActivity(getActivity(),SwipeActivity.class);
 					break;
 				default:
 				break;
@@ -176,11 +177,5 @@ public class AcountFragment extends BaseFragment {
 		BottomPopDialog dialog = new BottomPopDialog(getActivity(),
 				R.style.SheetDialogStyle);
 		dialog.show();
-	}
-
-	private <T> void stepNext(Class<T> t)
-	{
-		Intent intent = new Intent(getActivity(), t);
-		startActivity(intent);
 	}
 }

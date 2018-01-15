@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_screen_shot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.chyss.myapplication.widget.screenshot.ScreenShotActivity">
+
+    <Button
+        android:id="@+id/screenshot_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Screen Shot"
+        android:layout_below="@+id/screenshot_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"/>
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@mipmap/button_icon_zan_2"
+        android:layout_marginTop="50dp"
+        android:id="@+id/screenshot_img" android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

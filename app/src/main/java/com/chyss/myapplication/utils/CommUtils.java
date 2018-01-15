@@ -77,6 +77,26 @@ public class CommUtils
         return format.format(new Date());
     }
 
+    /**
+     * @return 返回当前时间,年月日，时分秒
+     */
+    public static String getTimes()
+    {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss",
+                Locale.SIMPLIFIED_CHINESE);
+        return format.format(new Date());
+    }
+
+    /**
+     * @return 返回当前时间,用于图片部分名称
+     */
+    public static String getTimeForPicture()
+    {
+        SimpleDateFormat format = new SimpleDateFormat("_yyyyMMdd_HHmmss",
+                Locale.SIMPLIFIED_CHINESE);
+        return format.format(new Date());
+    }
+
     public static boolean isMobileNum(String mobiles) {
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(17[0-9])|(14[0-9])|(18[0-9]))\\d{8}$");
         Matcher m = p.matcher(mobiles);

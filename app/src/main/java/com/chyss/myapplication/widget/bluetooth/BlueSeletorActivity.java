@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.chyss.myapplication.BaseActivity;
 import com.chyss.myapplication.R;
+import com.chyss.myapplication.utils.DoAction;
 import com.chyss.myapplication.widget.bluetooth.ble.BleDiscoverActivity;
 import com.chyss.myapplication.widget.bluetooth.ble.BleServiceActivity;
 import com.chyss.myapplication.widget.bluetooth.phone.BlueConnActivity;
@@ -42,24 +43,18 @@ public class BlueSeletorActivity extends BaseActivity
         {
             switch (v.getId()){
                 case R.id.bluetooth_conn:
-                    stepNext(BlueConnActivity.class); //主连接（手机）
+                    DoAction.startActivity(BlueSeletorActivity.this,BlueConnActivity.class); //主连接（手机）
                     break;
                 case R.id.bluetooth_service:
-                    stepNext(BlueServiceActivity.class); //从（手机）
+                    DoAction.startActivity(BlueSeletorActivity.this,BlueServiceActivity.class); //从（手机）
                     break;
                 case R.id.bluetooth_blemain:
-                    stepNext(BleDiscoverActivity.class); //蓝牙模块通信,主
+                    DoAction.startActivity(BlueSeletorActivity.this,BleDiscoverActivity.class); //蓝牙模块通信,主
                     break;
                 case R.id.bluetooth_bleservice:
-                    stepNext(BleServiceActivity.class); //蓝牙模块通信，从
+                    DoAction.startActivity(BlueSeletorActivity.this,BleServiceActivity.class); //蓝牙模块通信，从
                     break;
             }
         }
     };
-
-    private void stepNext(Class mClass)
-    {
-        Intent intent = new Intent(this,mClass);
-        startActivity(intent);
-    }
 }

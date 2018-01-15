@@ -18,6 +18,9 @@ package com.chyss.myapplication.widget.opengl;
 import android.app.Activity;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.view.View;
+
+import com.chyss.myapplication.utils.Logg;
 
 public class OpenglActivity extends Activity {
 

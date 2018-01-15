@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
+    <!-- sd卡读写 -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
@@ -18,13 +19,19 @@
     <!-- 蓝牙 -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
-    <!--<uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/>-->
+    <!-- <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED"/> -->
 
-    <!--声明你的应用程序只能在支持BLE的设备上运行 蓝牙4.0-->
-    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"></uses-feature>
 
-    <!--Android 5.0之后-->
-    <!--<uses-feature android:name="android.bluetooth.le" android:required="true"/>-->
+    <!-- camera -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <!-- 声明你的应用程序只能在支持BLE的设备上运行 蓝牙4.0 -->
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true"/>
+
+    <!-- Android 5.0之后 -->
+    <!-- <uses-feature android:name="android.bluetooth.le" android:required="true"/> -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
@@ -32,6 +39,9 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
+
+    <!--设置权限，其他的应用访问服务的需要配置的权限-->
+    <permission android:name="com.chyss.myapplication.permission.ACCESS_LOCALSERVICE"/>
 
     <application
         android:name=".MyApplication"
@@ -46,8 +56,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent"
-            >
+            android:theme="@android:style/Theme.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -121,6 +130,7 @@
         </activity>
         <activity
             android:name=".widget.opengl.OpenglActivity"
+            android:hardwareAccelerated="true"
             android:screenOrientation="portrait">
         </activity>
         <activity
@@ -163,6 +173,22 @@
             android:name=".widget.messagePack.MessagePackActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".widget.scrollshow.ScrollShowActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".widget.linearsv.LinearSVActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".widget.aidl.aidl.ClientAidlActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".widget.aidl.messenger.MessengerActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <service android:name=".widget.bluetooth.ble.BleService"/>
 
@@ -171,5 +197,31 @@
                 <action android:name="com.chyss.myapplication.notice"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".widget.aidl.aidl.MyService"
+            android:process=":myservice">
+        </service>
+        <service
+            android:name=".widget.aidl.messenger.MessengerService"
+            android:process=":messengerservice">
+        </service>
+        <service
+            android:name=".widget.aidl.process.LocalService"
+            android:process=":local">
+        </service>
+        <service
+            android:name=".widget.aidl.process.RemoteService"
+            android:process=":remote">
+        </service>
+
+        <activity
+            android:name=".widget.screenshot.ScreenShotActivity"
+            android:screenOrientation="portrait">
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data android:name="com.google.android.gms.version"
+                   android:value="@integer/google_play_services_version"/>
     </application>
+
 </manifest>

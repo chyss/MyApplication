@@ -1,10 +1,14 @@
 package com.chyss.myapplication;
 
+import com.alipay.euler.andfix.patch.PatchManager;
+import com.chyss.myapplication.data.Net;
+import com.chyss.myapplication.utils.Logg;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.app.Application;
+import android.os.Environment;
 
 public class MyApplication extends Application {
 
@@ -23,6 +27,23 @@ public class MyApplication extends Application {
 				.build();
 
 		ImageLoader.getInstance().init(imageLoaderConfiguration);
+
+		// 热修复 AndFix
+		PatchManager patchManager = new PatchManager(this);
+		patchManager.init(Net.VERSIONCODE);//current version
+		patchManager.loadPatch();
+
+		try
+		{
+			// 获取内置SD卡路径
+			String path = Environment.getExternalStorageDirectory().getPath()+"/chyss/app-andfix";
+			patchManager.addPatch(path);
+		}
+		catch (Exception e)
+		{
+			Logg.e(Net.TAG, "andfix error : " + e);
+		}
+
 
 		// File cacheDir = StorageUtils.getCacheDirectory(context);
 		// ImageLoaderConfiguration config = new

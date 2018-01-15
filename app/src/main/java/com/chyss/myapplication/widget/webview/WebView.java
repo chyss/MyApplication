@@ -5,11 +5,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -95,6 +97,8 @@ public class WebView extends BaseActivity
 		webView.getSettings().setDomStorageEnabled(true); 
 		//缩放权限
 		webView.getSettings().setSupportZoom(true);
+		//添加下载监听
+		webView.setDownloadListener(new MyWebViewDownLoadListener());
 		//android与js交互接口
 		webView.addJavascriptInterface(new JavaScriptObject(WebView.this), JavaScriptObject.obj);
 		//告诉WebView先不要自动加载图片，等页面finish后再发起图片加载。
@@ -217,5 +221,20 @@ public class WebView extends BaseActivity
 	protected void onDestroy() {
 		progressBar.cancelAnim();
 		super.onDestroy();
+	}
+
+	/**
+	 * vebview下载监听，拉起浏览器进行下载
+	 */
+	private class MyWebViewDownLoadListener implements DownloadListener
+	{
+
+		@Override
+		public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype,
+									long contentLength) {
+			Uri uri = Uri.parse(url);
+			Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+			startActivity(intent);
+		}
 	}
 }

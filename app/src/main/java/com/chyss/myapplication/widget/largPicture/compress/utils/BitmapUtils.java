@@ -111,12 +111,12 @@ public class BitmapUtils
     private static String saveMyBitmap(String filename, Bitmap bit) {
         String baseDir = Environment.getExternalStorageDirectory().getPath()+PATH;
 
-        String filePath = baseDir + filename;
         File dir = new File(baseDir);
         if (!dir.exists()) {
             dir.mkdir();
         }
 
+        String filePath = baseDir + filename;
         File f = new File(filePath);
         try {
             f.createNewFile();
