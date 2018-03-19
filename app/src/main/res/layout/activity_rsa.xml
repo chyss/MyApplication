@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:gravity="center_horizontal|center_vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button
+        android:text="生成密钥"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/rsa_key"/>
+    <Button
+        android:text="加密"
+        android:layout_marginTop="50dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/rsa_entrypt"/>
+    <Button
+        android:text="解密"
+        android:layout_marginTop="50dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/rsa_detrypt"/>
+</LinearLayout>

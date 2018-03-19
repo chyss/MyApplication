@@ -199,6 +199,10 @@
             android:name=".widget.gis.GisActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".widget.encrypt.RsaActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <service android:name=".widget.bluetooth.ble.BleService"/>
 

@@ -6,7 +6,7 @@ import java.net.SocketTimeoutException;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 
-public class Net
+public abstract class Net
 {
 	// 服务器的根地址
 	public static final String domain = "http://api-and.hrjk-p2p.com/v2/";  //test

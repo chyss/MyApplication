@@ -17,10 +17,17 @@ import org.reactivestreams.Subscription;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -40,6 +47,30 @@ public class RxActivity extends BaseActivity
 
         //getVersionsInfo();
         rxjava_response_notes = (TextView)findViewById(R.id.rxjava_response_notes);
+
+        Observable.create(new ObservableOnSubscribe<String>()
+        {
+            @Override
+            public void subscribe(ObservableEmitter<String> e) throws Exception
+            {
+                Logg.e("accept","subscribe ---------- "+Thread.currentThread());
+                e.onNext("1111111111111111111");
+                e.onNext("2222222222222222222222");
+                e.onNext("3333333333333333333333333");
+                e.onComplete();
+            }
+        })
+         .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Consumer<String>()
+        {
+            @Override
+            public void accept(String s) throws Exception
+            {
+                Thread.sleep(1000);
+                Logg.e("accept","accept ---------- "+s + "----"+Thread.currentThread());
+            }
+        });
     }
 
     @Override
@@ -49,6 +80,67 @@ public class RxActivity extends BaseActivity
 //        getVersionsInfoOld();
         super.onResume();
     }
+
+    private void getVersionsInfo2()
+    {
+        Map<String, String> map = new HashMap<>();
+        map.put("version", Net.VERSIONCODE);
+        map.put("platform", Net.PLATFORM);
+
+        RetrofitUtils.postRequestObservable(Net.version,map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())  //处理数据线程的切换
+//                .flatMap(new Function<String, ObservableSource<?>>()
+//                {
+//                    @Override
+//                    public ObservableSource<?> apply(String s) throws Exception
+//                    {
+//                        return null;
+//                    }
+//                })
+                .map(new Function<String, ResultDesc<Version>>()
+                {
+                    @Override
+                    public ResultDesc<Version> apply(String json) throws Exception
+                    {
+                        Logg.e(Net.TAG,"map ： "+Thread.currentThread()+" ---- "+json);
+                        return DataImpl.getData(json,Version.class);
+                    }
+                })
+                .subscribe(new Observer<ResultDesc<Version>>()
+                {
+                    Disposable disposable;
+
+                    @Override
+                    public void onSubscribe(Disposable d)
+                    {
+                        disposable = d;
+                    }
+
+                    @Override
+                    public void onNext(ResultDesc<Version> value)
+                    {
+                        Logg.e("tag","");
+                    }
+
+                    @Override
+                    public void onError(Throwable e)
+                    {
+
+                    }
+
+                    @Override
+                    public void onComplete()
+                    {
+                        if(disposable != null && !disposable.isDisposed())
+                        {
+                            disposable.dispose();
+                        }
+                    }
+                });
+    }
+
+
 
     /**
      * Flowable为Rxjava 2.0 版本新增的api，解决了背压情况

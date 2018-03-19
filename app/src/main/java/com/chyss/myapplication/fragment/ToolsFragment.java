@@ -9,13 +9,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.chyss.myapplication.R;
 import com.chyss.myapplication.widget.aidl.messenger.MessengerActivity;
 import com.chyss.myapplication.utils.DoAction;
 import com.chyss.myapplication.widget.aidl.aidl.ClientAidlActivity;
 import com.chyss.myapplication.widget.aidl.process.LocalService;
+import com.chyss.myapplication.widget.encrypt.RsaActivity;
 import com.chyss.myapplication.widget.gis.GisActivity;
+import com.chyss.myapplication.widget.jni.MyJni;
 import com.chyss.myapplication.widget.linearsv.LinearSVActivity;
 import com.chyss.myapplication.widget.retrofit.RetrofitActivity;
 import com.chyss.myapplication.widget.rxjava.RxActivity;
@@ -37,14 +40,6 @@ import java.util.Map;
 
 public class ToolsFragment extends BaseFragment {
 
-	private RelativeLayout retrofit,rxjava,traces,opengl,bluetooth,msgpack;
-	private RelativeLayout bigimage_compress,localimage_compress,permission_get,scroll_show,linear_sview,screen_shot;
-	private RelativeLayout aidl_client,aidl_service;
-	private RelativeLayout kill_process,kill_app;
-	private RelativeLayout bind_local,kill_remote,kill_local;
-	private RelativeLayout zone_gis;
-	
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -63,53 +58,34 @@ public class ToolsFragment extends BaseFragment {
 
 	private void init(View root) {
 
-		retrofit = (RelativeLayout)root.findViewById(R.id.zone_retrofit);
-		retrofit.setOnClickListener(onClickListener);
-		rxjava = (RelativeLayout)root.findViewById(R.id.zone_rxjava);
-		rxjava.setOnClickListener(onClickListener);
-		traces = (RelativeLayout)root.findViewById(R.id.zone_traces);
-		traces.setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_retrofit).setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_rxjava).setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_traces).setOnClickListener(onClickListener);
 
-		opengl = (RelativeLayout)root.findViewById(R.id.zone_opengl);
-		opengl.setOnClickListener(onClickListener);
-		bluetooth = (RelativeLayout)root.findViewById(R.id.zone_bluetooth);
-		bluetooth.setOnClickListener(onClickListener);
-		msgpack = (RelativeLayout)root.findViewById(R.id.zone_msgpack);
-		msgpack.setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_opengl).setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_bluetooth).setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_msgpack).setOnClickListener(onClickListener);
 
-		bigimage_compress = (RelativeLayout)root.findViewById(R.id.bigimage_compress);
-		bigimage_compress.setOnClickListener(onClickListener);
-		localimage_compress = (RelativeLayout)root.findViewById(R.id.localimage_compress);
-		localimage_compress.setOnClickListener(onClickListener);
-		permission_get = (RelativeLayout)root.findViewById(R.id.permission_get);
-		permission_get.setOnClickListener(onClickListener);
+		root.findViewById(R.id.bigimage_compress).setOnClickListener(onClickListener);
+		root.findViewById(R.id.localimage_compress).setOnClickListener(onClickListener);
+		root.findViewById(R.id.permission_get).setOnClickListener(onClickListener);
 
-		scroll_show = (RelativeLayout)root.findViewById(R.id.scroll_show);
-		linear_sview = (RelativeLayout)root.findViewById(R.id.linear_sview);
-		screen_shot = (RelativeLayout)root.findViewById(R.id.screen_shot);
-		scroll_show.setOnClickListener(onClickListener);
-		linear_sview.setOnClickListener(onClickListener);
-		screen_shot.setOnClickListener(onClickListener);
+		root.findViewById(R.id.scroll_show).setOnClickListener(onClickListener);
+		root.findViewById(R.id.linear_sview).setOnClickListener(onClickListener);
+		root.findViewById(R.id.screen_shot).setOnClickListener(onClickListener);
 
-		aidl_client = (RelativeLayout)root.findViewById(R.id.aidl_client);
-		aidl_service = (RelativeLayout)root.findViewById(R.id.aidl_service);
-		aidl_client.setOnClickListener(onClickListener);
-		aidl_service.setOnClickListener(onClickListener);
+		root.findViewById(R.id.aidl_client).setOnClickListener(onClickListener);
+		root.findViewById(R.id.aidl_service).setOnClickListener(onClickListener);
 
-		zone_gis = (RelativeLayout)root.findViewById(R.id.zone_gis);
-		zone_gis.setOnClickListener(onClickListener);
+		root.findViewById(R.id.zone_gis).setOnClickListener(onClickListener);
+		root.findViewById(R.id.kill_app).setOnClickListener(onClickListener);
+		root.findViewById(R.id.kill_process).setOnClickListener(onClickListener);
 
-		kill_app = (RelativeLayout)root.findViewById(R.id.kill_app);
-		kill_process = (RelativeLayout)root.findViewById(R.id.kill_process);
-		kill_app.setOnClickListener(onClickListener);
-		kill_process.setOnClickListener(onClickListener);
-
-		bind_local = (RelativeLayout)root.findViewById(R.id.bind_local);
-		kill_remote = (RelativeLayout)root.findViewById(R.id.kill_remote);
-		kill_local = (RelativeLayout)root.findViewById(R.id.kill_local);
-		bind_local.setOnClickListener(onClickListener);
-		kill_remote.setOnClickListener(onClickListener);
-		kill_local.setOnClickListener(onClickListener);
+		root.findViewById(R.id.bind_local).setOnClickListener(onClickListener);
+		root.findViewById(R.id.kill_remote).setOnClickListener(onClickListener);
+		root.findViewById(R.id.kill_local).setOnClickListener(onClickListener);
+		root.findViewById(R.id.tool_rsa).setOnClickListener(onClickListener);
+		root.findViewById(R.id.tool_jni).setOnClickListener(onClickListener);
 	}
 
 	View.OnClickListener onClickListener = new View.OnClickListener()
@@ -198,6 +174,12 @@ public class ToolsFragment extends BaseFragment {
 					break;
 				case R.id.zone_gis:
 					DoAction.startActivity(getActivity(),GisActivity  .class);
+					break;
+				case R.id.tool_rsa:
+					DoAction.startActivity(getActivity(),RsaActivity.class);
+					break;
+				case R.id.tool_jni:
+					Toast.makeText(getActivity(), MyJni.fromNative(),Toast.LENGTH_SHORT).show();
 					break;
 				default:
 					break;

@@ -9,8 +9,10 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import android.app.Application;
 import android.os.Environment;
+import android.support.multidex.MultiDexApplication;
 
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication
+{
 
 	@Override
 	public void onCreate() {

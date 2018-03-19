@@ -1,11 +1,9 @@
 package com.chyss.myapplication.fragment.home;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -21,6 +19,10 @@ import com.chyss.myapplication.R;
 import com.chyss.myapplication.utils.UnitUtils;
 import com.chyss.myapplication.utils.image.FrescoUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * viewpager实现的广播循环轮播
@@ -83,7 +85,7 @@ public class NewsFragment extends Fragment
 	{
 		//初始化viewpager
 		newsPager.setAdapter(pagerAdapter);
-		newsPager.setOnPageChangeListener(onPageChangeListener);
+		newsPager.addOnPageChangeListener(onPageChangeListener);
 
 		//初始化notes
 		for (int i = 0; i < list.size(); i++) {
@@ -206,21 +208,48 @@ public class NewsFragment extends Fragment
 	/**
 	 * 循环延时切换view
 	 */
-	Handler handler = new Handler()
+	Handler mhandler = new Handler()
 	{
-		public void handleMessage(android.os.Message msg) 
+		public void handleMessage(android.os.Message msg)
 		{
 			switch (msg.what)
 			{
 			case 0:
 				newsPager.setCurrentItem(index);
 				break;
-			case 1:
-				initData();  //用于模拟异步加载，真正使用时需从服务器获取Url等数据后，再完成初始化
-				break;
 			default:
 				break;
 			}
 		}
 	};
+
+	private final MyHandler handler = new MyHandler(this);
+
+	static class MyHandler extends Handler
+	{
+		// 使用WeakReference保存当前引用，方便系统GC
+		WeakReference<NewsFragment> fragment;
+
+		private MyHandler(NewsFragment fragment)
+		{
+			this.fragment = new WeakReference<>(fragment);
+		}
+
+		@Override
+		public void handleMessage(Message msg)
+		{
+			NewsFragment newsFragment = fragment.get();
+			if(newsFragment != null)
+			{
+				switch (msg.what)
+				{
+					case 0:
+						newsFragment.newsPager.setCurrentItem(newsFragment.index);
+						break;
+					default:
+						break;
+				}
+			}
+		}
+	}
 }
